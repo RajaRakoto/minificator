@@ -6,21 +6,24 @@
  module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt); // grunt plugins loader
 
-	// path
-	const homePath = 'cd ../../..';
+	// TODO: work
+	/**
+	 * All path
+	 */
+	const homePath = 'cd ../../';
 	const imageInputPath = './input/images/';
 	const imageOutputPath = './output/images/';
-	const scriptInputPath = './input/scripts/*.js';
-	const scriptOutputPath = './output/scripts/';
-	const htmlInputPath = './input/html/*.html';
+	const htmlInputPath = './input/html/';
 	const htmlOutputPath = './output/html/';
+	const scriptInputPath = './input/scripts/';
+	const scriptOutputPath = './output/scripts/';
 	const distPath = 'cd node_modules/@raja_rakoto/minificator';
 
 	/**
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
 	 */
 	grunt.initConfig({
-		// TODO: verified
+		// TODO: verified (set node_modules path)
 		/**
 		 * Run shell commands
 		 */
@@ -35,25 +38,25 @@
 			},
 			clear_input: {
 				command: [
-					'cd minificator/input/css && touch tmp.css && rm *.css',
+					'cd input/css && touch tmp.css && rm *.css',
 					homePath,
-					'cd minificator/input/html && touch tmp.html && rm *.html',
+					'cd input/html && touch tmp.html && rm *.html',
 					homePath,
-					'cd minificator/input/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
+					'cd input/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
 					homePath,
-					'cd minificator/input/scripts && touch tmp.js && rm *.js',
+					'cd input/scripts && touch tmp.js && rm *.js',
 					homePath,
 				].join(' && '),
 			},
 			clear_output: {
 				command: [
-					'cd minificator/output/css && touch tmp.css && rm *.css',
+					'cd output/css && touch tmp.css && rm *.css',
 					homePath,
-					'cd minificator/output/html && touch tmp.html && rm *.html',
+					'cd output/html && touch tmp.html && rm *.html',
 					homePath,
-					'cd minificator/output/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
+					'cd output/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
 					homePath,
-					'cd minificator/output/scripts && touch tmp.js && rm *.js',
+					'cd output/scripts && touch tmp.js && rm *.js',
 					homePath,
 				].join(' && '),
 			},
@@ -68,31 +71,15 @@
 				files: [
 					{
 						expand: true,
-						cwd: imageInputPath, // img source
-						src: ['**/*.{png,jpg,gif,svg}'], // img extension
-						dest: imageOutputPath, // img destination
+						cwd: imageInputPath,
+						src: ['**/*.{png,jpg,gif,svg}'],
+						dest: imageOutputPath,
 					},
 				],
 			},
 		},
 
-		// TODO: work
-		/**
-		 * Minify & optimize js files
-		 */
-		uglify: {
-			options: {
-				mangle: false, // variable minification
-			},
-			dist: {
-				files: {
-					// dest:src
-					scriptOutputPath: scriptInputPath,
-				},
-			},
-		},
-
-		// TODO: work
+		// TODO: verified
 		/**
 		 * Minify HTML
 		 */
@@ -102,10 +89,34 @@
 					removeComments: true,
 					collapseWhitespace: true,
 				},
-				files: {
-					// dest:src
-					htmlOutputPath: htmlInputPath,
-				},
+				files: [
+					{
+						expand: true,
+						cwd: htmlInputPath,
+						src: '*.html',
+						dest: htmlOutputPath,
+					},
+				],
+			},
+		},
+
+		// TODO: verified
+		/**
+		 * Minify & optimize js files
+		 */
+		uglify: {
+			options: {
+				mangle: false,
+			},
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: scriptInputPath,
+						src: '*.js',
+						dest: scriptOutputPath,
+					},
+				],
 			},
 		},
 	});
