@@ -12,7 +12,7 @@
 
 <h5>~ Demo ~</h5>
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true" width=500>
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true">
 
 </div>
 
@@ -56,7 +56,7 @@ After initialization, you need to go to the newly generated **minificator** fold
 
 <div align="center">
 
-<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-lists.png?raw=true" width=500>
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-lists.png?raw=true">
 
 </div>
 
