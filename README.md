@@ -1,8 +1,18 @@
 <div align="center">
 
+## ᗰIᑎIᖴIᑕᗩTOᖇ
+
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com) [![forthebadge](https://github.com/RajaRakoto/github-docs/blob/master/badge/for-dago.svg?raw=true)](https://forthebadge.com) [![forthebadge](https://github.com/RajaRakoto/github-docs/blob/master/badge/build-by.svg?raw=true)](https://forthebadge.com)
 
 ![Grunt](https://img.shields.io/badge/-Grunt-777?style=flat&logo=grunt&logoColor=orangered&labelColor=ffffff) ![JSON](https://img.shields.io/badge/-JSON-777?style=flat&logo=JSON&logoColor=777&labelColor=ffffff) ![Javascript](https://img.shields.io/badge/-Javascript-777?style=flat&logo=javascript&logoColor=dbb332&labelColor=ffffff) ![Git](https://img.shields.io/badge/-Git-777?style=flat&logo=git&logoColor=F05032&labelColor=ffffff) ![Gitub](https://img.shields.io/badge/-Gitub-777?style=flat&logo=github&logoColor=777&labelColor=ffffff) ![NPM](https://img.shields.io/badge/-NPM-777?style=flat&logo=npm&labelColor=ffffff)<br>
+
+</div>
+
+<div align="center">
+
+**~ Demo ~**
+
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true" width=500>
 
 </div>
 
@@ -34,7 +44,7 @@ npm i @raja_rakoto/minificator
 
 ### `📌 Init`
 
-After installation, you need to initialize **Minificator** in your project root directory to use it, run the command below:
+After installation, you need to `initialize` **Minificator** in your project `root directory` to use it, run the command below:
 
 ```bash
 grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
@@ -43,6 +53,12 @@ grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificat
 ### `📌 Use`
 
 After initialization, you need to go to the newly generated **minificator** folder and type `grunt` in your console to see all executable commands
+
+<div align="center">
+
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-lists.png?raw=true" width=500>
+
+</div>
 
 Just copy the files to be minified in the directory `input/images` for images or `input/scripts` for javascript file and so on ...
 
@@ -53,3 +69,5 @@ grunt minificator-js
 ```
 
 Finally, the minifier files are in `output` directory
+
+🅴🅽🅹🅾🆈 ❗
