@@ -10,7 +10,7 @@
 
 <div align="center">
 
-**~ Demo ~**
+<h5>~ Demo ~</h5>
 
 <img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true" width=500>
 
