@@ -1,7 +1,7 @@
 {
 	"name": "@raja_rakoto/minificator",
 	"version": "1.0.0",
-	"description": "Minificator allows you to quickly minify your files (images, javascript, html, css) with grunt",
+	"description": "Minificator allows you to quickly minify your files (Images, HTML, CSS, javascript) with grunt",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
