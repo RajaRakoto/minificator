@@ -7,11 +7,14 @@
 	},
 	"keywords": [
 		"grunt",
+		"uglify",
 		"minify",
-		"htmlmin",
-		"cssmin",
+		"compress",
 		"imagemin",
-		"uglify"
+		"cssmin",
+		"dist",
+		"htmlmin",
+		"miniaturization"
 	],
 	"author": "Raja Rakotonirina",
 	"license": "MIT",
