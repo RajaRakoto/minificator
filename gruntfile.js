@@ -15,6 +15,8 @@
 	const imageOutputPath = './output/images/';
 	const htmlInputPath = './input/html/';
 	const htmlOutputPath = './output/html/';
+	const cssInputPath = './input/css/';
+	const cssOutputPath = './output/css/';
 	const scriptInputPath = './input/scripts/';
 	const scriptOutputPath = './output/scripts/';
 	const distPath = 'cd node_modules/@raja_rakoto/minificator';
@@ -93,8 +95,27 @@
 					{
 						expand: true,
 						cwd: htmlInputPath,
-						src: '*.html',
+						src: ['*.html', '!*.min.html'],
 						dest: htmlOutputPath,
+						ext: '.min.html',
+					},
+				],
+			},
+		},
+
+		// TODO: verified
+		/**
+		 * Minify CSS
+		 */
+		cssmin: {
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: cssInputPath,
+						src: ['*.css', '!*.min.css'],
+						dest: cssOutputPath,
+						ext: '.min.css',
 					},
 				],
 			},
@@ -113,8 +134,9 @@
 					{
 						expand: true,
 						cwd: scriptInputPath,
-						src: '*.js',
+						src: ['*.js', '!*.min.js'],
 						dest: scriptOutputPath,
+						ext: '.min.js',
 					},
 				],
 			},
