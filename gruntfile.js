@@ -1,17 +1,16 @@
 /**
  * @author: Raja
- * @description: a gruntfile.js template for setting up a basic GRUNT task runner based environment to quickly integrate and use in a project
- * @requires: npm install grunt load-grunt-tasks grunt-shell --save-dev
- * @dependencies: grunt shell:install_deps
+ * @description: a gruntfile.js for minificator
+ * @requires: npm i grunt load-grunt-tasks grunt-contrib-uglify grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-cssmin grunt-shell
  */
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt); // grunt plugins loader
 
-	// all files destination
-	const imageDistDestination = './src/dist/images/';
-
 	// node-glob syntax
 	const includeAllFiles = ['**/*', '.*/**/*', '**/.*', '**/.*/**/*'];
+
+	// path
+	const homePath = 'cd ../..';
 
 	/**
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
@@ -19,7 +18,38 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('./package.json'),
 
-		// TODO: verified
+		// TODO: work
+		/**
+		 * Run shell commands
+		 */
+		shell: {
+			clear_input: {
+				command: [
+					'cd input/css && touch tmp.css && rm *.css',
+					homePath,
+					'cd input/html && touch tmp.html && rm *.html',
+					homePath,
+					'cd input/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
+					homePath,
+					'cd input/scripts && touch tmp.js && rm *.js',
+					homePath,
+				].join(' && '),
+			},
+			clear_output: {
+				command: [
+					'cd output/css && touch tmp.css && rm *.css',
+					homePath,
+					'cd output/html && touch tmp.html && rm *.html',
+					homePath,
+					'cd output/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
+					homePath,
+					'cd output/scripts && touch tmp.js && rm *.js',
+					homePath,
+				].join(' && '),
+			},
+		},
+
+		// TODO: work
 		/**
 		 * Minify & optimize all images
 		 */
@@ -36,7 +66,7 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
+		// TODO: work
 		/**
 		 * Minify & optimize js files
 		 */
@@ -52,7 +82,7 @@ module.exports = function (grunt) {
 			},
 		},
 
-		// TODO: verified
+		// TODO: work
 		/**
 		 * Minify HTML
 		 */
@@ -74,22 +104,34 @@ module.exports = function (grunt) {
 	grunt.registerTask('imagemin-task', ['imagemin']); // manual
 	grunt.registerTask('uglify-task', ['uglify:dist']); // manual
 	grunt.registerTask('htmlmin-task', ['htmlmin:dist']); // manual
+	grunt.registerTask('minificator', [
+		'imagemin-task',
+		'uglify-task',
+		'htmlmin-task',
+	]); // auto
+	grunt.registerTask('clear-input', ['shell:clear_input']); // manual
+	grunt.registerTask('clear-output', ['shell:clear_output']); // manual
+	grunt.registerTask('clear-all', ['shell:clear_input', 'shell:clear_output']); // manual
 
 	// arrays basics tasks
 	const basicsTaskNames = ['imagemin-task', 'uglify-task', 'htmlmin-task'];
 	const basicsTaskStatus = ['imagemin', 'uglify:dist', 'htmlmin:dist'];
 
 	// arrays mixed tasks
-	const mixedTaskNames = [];
-	const mixedTaskStatus = [];
+	const mixedTaskNames = ['minificator'];
+	const mixedTaskStatus = ['(imagemin | uglify:dist | htmlmin:dist)'];
 
 	// arrays watched tasks
 	const watchedTaskNames = [];
 	const watchedTaskStatus = [];
 
 	// arrays others tasks
-	const othersTaskNames = [];
-	const othersTaskStatus = [];
+	const othersTaskNames = ['clear-input', 'clear-output', 'clear-all'];
+	const othersTaskStatus = [
+		'shell:clear_input',
+		'shell:clear_output',
+		'(shell:clear_input | shell:clear_output)',
+	];
 
 	// default tasks
 	grunt.registerTask('default', () => {
