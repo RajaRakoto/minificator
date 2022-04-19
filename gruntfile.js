@@ -1,12 +1,12 @@
 /**
  * @author: Raja
- * @description: A gruntfile template for minificator
+ * @description: A minificator gruntfile - allows you to quickly minify your files (Images, HTML, CSS, Javascript)
  * @requires: load-grunt-tasks grunt-contrib-uglify grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-cssmin grunt-shell
  */
  module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt); // grunt plugins loader
 
-	// TODO: work
+	// TODO: verified
 	/**
 	 * All path
 	 */
@@ -19,7 +19,6 @@
 	const cssOutputPath = './output/css/';
 	const scriptInputPath = './input/scripts/';
 	const scriptOutputPath = './output/scripts/';
-	const distPath = 'cd node_modules/@raja_rakoto/minificator';
 
 	/**
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
@@ -35,7 +34,7 @@
 					'mkdir minificator',
 					'cd minificator && mkdir -p input/html input/css input/scripts input/images output/html output/css output/scripts output/images',
 					'cd ..',
-					'cat gruntfile.js > minificator/gruntfile.js',
+					'cat node_modules/@raja_rakoto/minificator > minificator/gruntfile.js',
 				].join(' && '),
 			},
 			clear_input: {
@@ -143,44 +142,44 @@
 		},
 	});
 
-	// grunt basics tasks
-	grunt.registerTask('imagemin-task', ['imagemin']); // manual
-	grunt.registerTask('uglify-task', ['uglify:dist']); // manual
-	grunt.registerTask('htmlmin-task', ['htmlmin:dist']); // manual
-	grunt.registerTask('minificator', [
-		'imagemin-task',
-		'uglify-task',
-		'htmlmin-task',
-	]); // auto
-	grunt.registerTask('clear-input', ['shell:clear_input']); // manual
-	grunt.registerTask('clear-output', ['shell:clear_output']); // manual
-	grunt.registerTask('clear-all', ['shell:clear_input', 'shell:clear_output']); // manual
-	grunt.registerTask('initialize', ['shell:initialize']); // manual
+	// minificator registers tasks
+	grunt.registerTask('minificator-image', ['imagemin']);
+	grunt.registerTask('minificator-html', ['htmlmin:dist']);
+	grunt.registerTask('minificator-css', ['cssmin:dist']);
+	grunt.registerTask('minificator-js', ['uglify:dist']);
+	grunt.registerTask('minificator-all', [
+		'minificator-image',
+		'minificator-html',
+		'minificator-css',
+		'minificator-js',
+	]);
+	grunt.registerTask('minificator-init', ['shell:initialize']);
+	grunt.registerTask('clear-input', ['shell:clear_input']);
+	grunt.registerTask('clear-output', ['shell:clear_output']);
+	grunt.registerTask('clear-all', ['shell:clear_input', 'shell:clear_output']);
 
-	// arrays basics tasks
-	const basicsTaskNames = ['imagemin-task', 'uglify-task', 'htmlmin-task'];
-	const basicsTaskStatus = ['imagemin', 'uglify:dist', 'htmlmin:dist'];
-
-	// arrays mixed tasks
-	const mixedTaskNames = ['minificator'];
-	const mixedTaskStatus = ['(imagemin | uglify:dist | htmlmin:dist)'];
-
-	// arrays watched tasks
-	const watchedTaskNames = [];
-	const watchedTaskStatus = [];
-
-	// arrays others tasks
-	const othersTaskNames = [
-		'initialize',
+	// minificator tasks list
+	const minificatorTaskNames = [
+		'minificator-init',
+		'minificator-all',
+		'minificator-image',
+		'minificator-html',
+		'minificator-css',
+		'minificator-js',
 		'clear-input',
 		'clear-output',
 		'clear-all',
 	];
-	const othersTaskStatus = [
-		'shell:initialize',
-		'shell:clear_input',
-		'shell:clear_output',
-		'(shell:clear_input | shell:clear_output)',
+	const minificatorTaskStatus = [
+		'Run this command (in the root directory) to "initialize" the minificator working directory',
+		'Minify all input files (images, html, css, javascript)',
+		'Minify all input Images',
+		'Minify all input HTML',
+		'Minify all input CSS',
+		'Minify all input Javascript',
+		'Delete all input files',
+		'Delete all output files',
+		'Delete all input/output files',
 	];
 
 	// default tasks
@@ -230,14 +229,23 @@
 		}
 
 		// all tasks resume
-		getTaskResume('basics tasks', basicsTaskNames, basicsTaskStatus, 'cyan');
-		getTaskResume('mixed tasks', mixedTaskNames, mixedTaskStatus, 'magenta');
-		getTaskResume('watched tasks', watchedTaskNames, watchedTaskStatus, 'blue');
 		getTaskResume(
-			'shell & others tasks',
-			othersTaskNames,
-			othersTaskStatus,
+			'~ MINIFICATOR TASKS ~',
+			minificatorTaskNames,
+			minificatorTaskStatus,
 			'yellow',
+		);
+
+		getTaskResume(
+			'~ SYNOPSIS ~',
+			['grunt [task_name]'],
+			['E.g: grunt minificator-js'],
+			'magenta',
+		);
+
+		console.log(
+			'\n[NOTE]: you must be in the "minificator" directory to perform the above tasks'
+				.cyan,
 		);
 	});
 };
