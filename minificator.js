@@ -24,7 +24,7 @@
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
 	 */
 	grunt.initConfig({
-		// TODO: verified (set node_modules path)
+		// TODO: verified
 		/**
 		 * Run shell commands
 		 */
@@ -34,7 +34,9 @@
 					'mkdir minificator',
 					'cd minificator && mkdir -p input/html input/css input/scripts input/images output/html output/css output/scripts output/images',
 					'cd ..',
-					'cat node_modules/@raja_rakoto/minificator > minificator/gruntfile.js',
+					'cat minificator.js > minificator/gruntfile.js',
+					'mv minificator ../../../',
+					'echo -e "\nMinificator is initialized on root directory..."'
 				].join(' && '),
 			},
 			clear_input: {
