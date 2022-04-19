@@ -1,16 +1,7 @@
 {
-	"dependencies": {
-		"grunt": "^1.5.2",
-		"grunt-contrib-cssmin": "^4.0.0",
-		"grunt-contrib-htmlmin": "^3.1.0",
-		"grunt-contrib-imagemin": "^4.0.0",
-		"grunt-contrib-uglify": "^5.2.1",
-		"grunt-shell": "^4.0.0",
-		"load-grunt-tasks": "^5.1.0"
-	},
-	"name": "minificator",
+	"name": "@raja_rakoto/minificator",
 	"version": "1.0.0",
-	"description": "Allows you to quickly minify your files (images, javascript, html, css) with grunt",
+	"description": "Minificator allows you to quickly minify your files (images, javascript, html, css) with grunt",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -23,5 +14,14 @@
 		"uglify"
 	],
 	"author": "Raja Rakotonirina",
-	"license": "MIT"
+	"license": "MIT",
+	"dependencies": {
+		"grunt": "^1.5.2",
+		"grunt-contrib-cssmin": "^4.0.0",
+		"grunt-contrib-htmlmin": "^3.1.0",
+		"grunt-contrib-imagemin": "^4.0.0",
+		"grunt-contrib-uglify": "^5.2.1",
+		"grunt-shell": "^4.0.0",
+		"load-grunt-tasks": "^5.1.0"
+	}
 }
