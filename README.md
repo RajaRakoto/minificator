@@ -34,12 +34,18 @@ Here are the benefits of using **Minificator**:
 > - You no longer need to use a web application or other similar software
 > - Minificator is isolated in a working folder of its own, which means if you use another gruntfile, it's not a problem
 
-### `📌 Install`
+### `📌 Install & Update`
 
 You can install **Minificator** with NPM:
 
 ```bash
 npm i @raja_rakoto/minificator
+```
+
+If you already have **Minificator** in your project and just want to update it, run the following command:
+
+```bash
+npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
 ```
 
 ### `📌 Init`
