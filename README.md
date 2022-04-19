@@ -1,1 +1,1 @@
-~ README ~
+Allows you to quickly minify your files (images, javascript, html, css) with grunt
