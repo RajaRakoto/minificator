@@ -1,17 +1,20 @@
 {
 	"name": "@raja_rakoto/minificator",
 	"version": "1.0.0",
-	"description": "Minificator allows you to quickly minify your files (Images, HTML, CSS, javascript) with grunt",
+	"description": "Minificator allows you to quickly minify your files (Images, HTML, CSS, Javascript) with grunt",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
 		"grunt",
+		"uglify",
 		"minify",
-		"htmlmin",
-		"cssmin",
+		"compress",
 		"imagemin",
-		"uglify"
+		"cssmin",
+		"dist",
+		"htmlmin",
+		"miniaturization"
 	],
 	"author": "Raja Rakotonirina",
 	"license": "MIT",
