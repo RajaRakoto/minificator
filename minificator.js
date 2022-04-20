@@ -31,8 +31,9 @@ module.exports = function (grunt) {
 		shell: {
 			initialize: {
 				command: [
-					'npm i grunt grunt-contrib-cssmin grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-uglify grunt-shell load-grunt-tasks -D',
-					'echo -e "\nConfig dev dependencies ... [done]"\n',
+					'cd ../../../ && npm i grunt grunt-contrib-cssmin grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-uglify grunt-shell load-grunt-tasks -D',
+					'cd node_modules/@raja_rakoto/minificator',
+					'echo -e "\nConfig dev dependencies ... [done]\n"',
 					'mkdir minificator',
 					'cd minificator && mkdir -p input/html input/css input/scripts input/images output/html output/css output/scripts output/images',
 					'cd ..',
