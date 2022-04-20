@@ -48,6 +48,8 @@ If you already have **Minificator** in your project and just want to update it, 
 npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
 ```
 
+> **WARNING**: All files contained in the "minificator" directory will be deleted after the update, so remember to make a backup before starting an update
+
 ### `📌 Init`
 
 After installation, you need to `initialize` **Minificator** in your project `root directory` to use it, run the command below:
