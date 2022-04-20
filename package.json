@@ -5,6 +5,10 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RajaRakoto/minificator.git"
+	},
 	"keywords": [
 		"grunt",
 		"uglify",
@@ -18,6 +22,10 @@
 	],
 	"author": "Raja Rakotonirina",
 	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/RajaRakoto/minificator/issues"
+	},
+	"homepage": "https://github.com/RajaRakoto/minificator#readme",
 	"dependencies": {
 		"grunt": "^1.5.2",
 		"grunt-contrib-cssmin": "^4.0.0",

@@ -3,7 +3,7 @@
  * @description: A minificator gruntfile - allows you to quickly minify your files (Images, HTML, CSS, Javascript)
  * @requires: load-grunt-tasks grunt-contrib-uglify grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-cssmin grunt-shell
  */
- module.exports = function (grunt) {
+module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt); // grunt plugins loader
 
 	// TODO: verified
@@ -31,12 +31,14 @@
 		shell: {
 			initialize: {
 				command: [
+					'npm i grunt grunt-contrib-cssmin grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-uglify grunt-shell load-grunt-tasks -D',
+					'echo -e "\nConfig dev dependencies ... [done]"\n',
 					'mkdir minificator',
 					'cd minificator && mkdir -p input/html input/css input/scripts input/images output/html output/css output/scripts output/images',
 					'cd ..',
 					'cat minificator.js > minificator/gruntfile.js',
 					'mv minificator ../../../',
-					'echo -e "\nMinificator is initialized on root directory..."'
+					'echo -e "\nMinificator is initialized on root directory ... [done]"',
 				].join(' && '),
 			},
 			clear_input: {
