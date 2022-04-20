@@ -56,6 +56,8 @@ After installation, you need to `initialize` **Minificator** in your project `ro
 grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
 ```
 
+> **NOTE**: You cannot initialize if the "minificator" directory is already present in your project, please delete it before starting the initialization
+
 ### `📌 Use`
 
 After initialization, you need to go to the newly generated **minificator** folder and type `grunt` in your console to see all executable commands
