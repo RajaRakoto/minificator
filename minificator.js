@@ -6,25 +6,22 @@
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt); // grunt plugins loader
 
-	// TODO: verified
 	/**
 	 * All path
 	 */
 	const homePath = 'cd ../../';
+	// input path
 	const imageInputPath = './input/images/';
-	const imageOutputPath = './output/images/';
 	const htmlInputPath = './input/html/';
-	const htmlOutputPath = './output/html/';
 	const cssInputPath = './input/css/';
-	const cssOutputPath = './output/css/';
 	const scriptInputPath = './input/scripts/';
-	const scriptOutputPath = './output/scripts/';
+	// output path
+	const outputPath = './output/';
 
 	/**
 	 * ~ ALL GRUNT PLUGINS CONFIG ~
 	 */
 	grunt.initConfig({
-		// TODO: verified
 		/**
 		 * Run shell commands
 		 */
@@ -32,10 +29,11 @@ module.exports = function (grunt) {
 			initialize: {
 				command: [
 					'cd ../../../ && npm i grunt grunt-contrib-cssmin grunt-contrib-htmlmin grunt-contrib-imagemin grunt-contrib-uglify grunt-shell load-grunt-tasks -D',
+					'echo -e "minificator" >> .gitignore',
 					'cd node_modules/@raja_rakoto/minificator',
 					'echo -e "\nConfig dev dependencies ... [done]\n"',
 					'mkdir minificator',
-					'cd minificator && mkdir -p input/html input/css input/scripts input/images output/html output/css output/scripts output/images',
+					'cd minificator && mkdir -p input/html input/css input/scripts input/images output',
 					'cd ..',
 					'cat minificator.js > minificator/gruntfile.js',
 					'mv minificator ../../../',
@@ -56,19 +54,18 @@ module.exports = function (grunt) {
 			},
 			clear_output: {
 				command: [
-					'cd output/css && touch tmp.css && rm *.css',
+					'cd output/ && touch tmp.css && rm *.css',
 					homePath,
-					'cd output/html && touch tmp.html && rm *.html',
+					'cd output/ && touch tmp.html && rm *.html',
 					homePath,
-					'cd output/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
+					'cd output/ && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
 					homePath,
-					'cd output/scripts && touch tmp.js && rm *.js',
+					'cd output/ && touch tmp.js && rm *.js',
 					homePath,
 				].join(' && '),
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Minify & optimize all images
 		 */
@@ -79,13 +76,12 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: imageInputPath,
 						src: ['**/*.{png,jpg,gif,svg}'],
-						dest: imageOutputPath,
+						dest: outputPath,
 					},
 				],
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Minify HTML
 		 */
@@ -100,14 +96,13 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: htmlInputPath,
 						src: ['*.html', '!*.min.html'],
-						dest: htmlOutputPath,
+						dest: outputPath,
 						ext: '.min.html',
 					},
 				],
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Minify CSS
 		 */
@@ -118,14 +113,13 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: cssInputPath,
 						src: ['*.css', '!*.min.css'],
-						dest: cssOutputPath,
+						dest: outputPath,
 						ext: '.min.css',
 					},
 				],
 			},
 		},
 
-		// TODO: verified
 		/**
 		 * Minify & optimize js files
 		 */
@@ -139,7 +133,7 @@ module.exports = function (grunt) {
 						expand: true,
 						cwd: scriptInputPath,
 						src: ['*.js', '!*.min.js'],
-						dest: scriptOutputPath,
+						dest: outputPath,
 						ext: '.min.js',
 					},
 				],
