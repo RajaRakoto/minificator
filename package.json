@@ -1,6 +1,6 @@
 {
 	"name": "@raja_rakoto/minificator",
-	"version": "1.0.5",
+	"version": "1.1.0",
 	"description": "Minificator allows you to quickly minify your files (Images, HTML, CSS, Javascript)",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
