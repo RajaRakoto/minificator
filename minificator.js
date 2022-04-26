@@ -10,12 +10,7 @@ module.exports = function (grunt) {
 	 * All path
 	 */
 	const homePath = 'cd ../../';
-	// input path
-	const imageInputPath = './input/images/';
-	const htmlInputPath = './input/html/';
-	const cssInputPath = './input/css/';
-	const scriptInputPath = './input/scripts/';
-	// output path
+	const inputPath = './input/';
 	const outputPath = './output/';
 
 	/**
@@ -33,7 +28,7 @@ module.exports = function (grunt) {
 					'cd node_modules/@raja_rakoto/minificator',
 					'echo -e "\nConfig dev dependencies ... [done]\n"',
 					'mkdir minificator',
-					'cd minificator && mkdir -p input/html input/css input/scripts input/images output',
+					'cd minificator && mkdir -p input output',
 					'cd ..',
 					'cat minificator.js > minificator/gruntfile.js',
 					'mv minificator ../../../',
@@ -41,28 +36,10 @@ module.exports = function (grunt) {
 				].join(' && '),
 			},
 			clear_input: {
-				command: [
-					'cd input/css && touch tmp.css && rm *.css',
-					homePath,
-					'cd input/html && touch tmp.html && rm *.html',
-					homePath,
-					'cd input/images && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
-					homePath,
-					'cd input/scripts && touch tmp.js && rm *.js',
-					homePath,
-				].join(' && '),
+				command: ['cd input && rm *'].join(' && '),
 			},
 			clear_output: {
-				command: [
-					'cd output/ && touch tmp.css && rm *.css',
-					homePath,
-					'cd output/ && touch tmp.html && rm *.html',
-					homePath,
-					'cd output/ && touch tmp.jpg tmp.png tmp.svg tmp.gif && rm *.jpg *.png *.svg *.gif',
-					homePath,
-					'cd output/ && touch tmp.js && rm *.js',
-					homePath,
-				].join(' && '),
+				command: ['cd output && rm *'].join(' && '),
 			},
 		},
 
@@ -74,7 +51,7 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: imageInputPath,
+						cwd: inputPath,
 						src: ['**/*.{png,jpg,gif,svg}'],
 						dest: outputPath,
 					},
@@ -94,7 +71,7 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: htmlInputPath,
+						cwd: inputPath,
 						src: ['*.html', '!*.min.html'],
 						dest: outputPath,
 						ext: '.min.html',
@@ -111,7 +88,7 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: cssInputPath,
+						cwd: inputPath,
 						src: ['*.css', '!*.min.css'],
 						dest: outputPath,
 						ext: '.min.css',
@@ -131,7 +108,7 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: scriptInputPath,
+						cwd: inputPath,
 						src: ['*.js', '!*.min.js'],
 						dest: outputPath,
 						ext: '.min.js',
