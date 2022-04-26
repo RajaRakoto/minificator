@@ -78,6 +78,8 @@ After initialization, you need to go to the newly generated **minificator** fold
 
 Just copy the files to be minified in the directory `input/images` for images or `input/scripts` for javascript file and so on ...
 
+> **NOTE**: Since version **1.1.x** of minificator, there is no more "images, html, css, scripts" sub-directory in `input` or `output`, just copy them in the `input` directory so that minificator can minify all files
+
 Then run the minification command, for example:
 
 ```bash
