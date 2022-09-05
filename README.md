@@ -48,7 +48,7 @@ Before using **Minificator**, please add this script command in your project's `
 
 ```json
 	"scripts": {
-		"minificator-install": "npm i @raja_rakoto/minificator",
+		"minificator-install": "npm i @raja_rakoto/minificator --save-dev",
 		"minificator-init": "grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
 		"minificator-update": "npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
 		"minificator-start": "grunt --gruntfile minificator/gruntfile.js"
