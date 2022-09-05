@@ -18,7 +18,7 @@
 
 > Since version **1.1.x** of minificator, there is no more "images, html, css, scripts" sub-directory in `input` or `output`, just copy them in the `input` directory so that minificator can minify all files
 
-<h5>~ Demo ~</h5>
+> This animated image is only a demonstration of this package but some things have been changed, so I invite you to read the documentation carefully
 
 <img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true">
 
@@ -44,16 +44,27 @@ Here are the benefits of using **Minificator**:
 
 ### `📌 Install & Update`
 
+Before using **Minificator**, please add this script command in your project's `package.json` file:
+
+```json
+	"scripts": {
+		"minificator-install": "npm i @raja_rakoto/minificator",
+		"minificator-init": "grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
+		"minificator-update": "npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
+		"minificator-start": "grunt minificator-js"
+	}
+```
+
 You can install **Minificator** with NPM:
 
 ```bash
-npm i @raja_rakoto/minificator
+npm run minificator-install
 ```
 
 If you already have **Minificator** in your project and just want to update it, run the following command:
 
 ```bash
-npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
+npm run minificator-update
 ```
 
 > **WARNING**: All files contained in the "minificator" directory will be deleted after the update, so remember to make a backup before starting an update
@@ -63,7 +74,7 @@ npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile no
 After installation, you need to `initialize` **Minificator** in your project `root directory` to use it, run the command below:
 
 ```bash
-grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init
+npm run minificator-init
 ```
 
 > **NOTE**: You cannot initialize if the "minificator" directory is already present in your project, please delete it before starting the initialization
@@ -83,7 +94,7 @@ Just copy the files to be minified in the directory `input/images` for images or
 Then run the minification command, for example:
 
 ```bash
-grunt minificator-js
+npm run minificator-start
 ```
 
 Finally, the minifier files are in `output` directory
