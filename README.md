@@ -51,7 +51,7 @@ Before using **Minificator**, please add this script command in your project's `
 		"minificator-install": "npm i @raja_rakoto/minificator",
 		"minificator-init": "grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
 		"minificator-update": "npm update @raja_rakoto/minificator && rm -r minificator && grunt --gruntfile node_modules/@raja_rakoto/minificator/minificator.js minificator-init",
-		"minificator-start": "grunt minificator-js"
+		"minificator-start": "grunt --gruntfile minificator/gruntfile.js"
 	}
 ```
 
@@ -81,7 +81,15 @@ npm run minificator-init
 
 ### `📌 Use`
 
+To test that **minificator** works correctly, run the following command:
+
+```bash
+npm run minificator-start
+```
+
 After initialization, you need to go to the newly generated **minificator** folder and type `grunt` in your console to see all executable commands
+
+Just copy the files to be minified in the `input` directory for the input files... So all the minified files are in the `output` directory
 
 <div align="center">
 
@@ -89,14 +97,7 @@ After initialization, you need to go to the newly generated **minificator** fold
 
 </div>
 
-Just copy the files to be minified in the directory `input/images` for images or `input/scripts` for javascript file and so on ...
+<div align="center">
 
-Then run the minification command, for example:
-
-```bash
-npm run minificator-start
-```
-
-Finally, the minifier files are in `output` directory
-
-🅴🅽🅹🅾🆈 ❗
+#### Enjoy it 😉
+</div>
