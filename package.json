@@ -51,10 +51,12 @@
     "version-patch": "npm version patch"
   },
   "dependencies": {
+    "inquirer": "^9.2.15",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/inquirer": "^9.0.7",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
