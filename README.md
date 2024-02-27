@@ -48,6 +48,7 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 
 - 📜 `start` - run your application with bun
 - 📜 `start:smol` - run your application with bun and a flag which configures the JavaScriptCore heap size to be smaller and grow slower ...
+- 📜 `start:bin` - run your standalone binary app
 - 📜 `clean` - remove coverage data, prod build, ...
 - 📜 `dev:watch` - interactive watch mode to automatically transpile source files with bun in development
 - 📜 `dev:hot` - hot reloading of source files with bun in development
@@ -55,6 +56,7 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 - 📜 `dev:smol:hot` - hot reloading source files with bun in development, while using --smol flag
 - 📜 `build` - transpile and bundle source files with bun
 - 📜 `build:watch` - interactive watch mode to automatically transpile source files with bun
+- 📜 `build:bin` - bun's bundler implements a --compile flag for generating a standalone binary from a TypeScript or JavaScript file, use this in your production environment to ensure optimal execution of your app.
 - 📜 `test` - run bun test
 - 📜 `test:watch` - interactive watch mode to automatically re-run tests with bun
 - 📜 `eslint` - lint source files with ESlint
