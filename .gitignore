@@ -8,9 +8,6 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # production
-build
-dist
-dist-ssr
 *.local
 
 # dependencies
