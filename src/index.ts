@@ -5,6 +5,7 @@ import { dev_prompt } from './examples/list';
 import { pizza_prompt } from './examples/checkbox';
 import { expand_prompt } from './examples/expand';
 import { tvShowLists, recursive_prompt } from './examples/confirm';
+import { complex_prompt } from './examples/complex';
 
 // ==============================
 
@@ -34,14 +35,21 @@ async function askRecursive(): Promise<void> {
     askRecursive();
   } else {
     console.log('tvShow lists: ', tvShowLists.join(', '));
+    await askComplex();
   }
+}
+
+// type = input | password | number | list | confirm | checkbox | rawlist | editor
+async function askComplex(): Promise<void> {
+  const complex_answers = await inquirer.prompt(complex_prompt);
+  console.dir(complex_answers);
 }
 
 async function main(): Promise<void> {
   await askDev();
   await askPizza();
   await askExpand();
-  await askRecursive();
+  await askRecursive(); // include askComplex()
 }
 
 main();
