@@ -23,8 +23,6 @@ Instant Value - All basic tools included and configured:
 - 🐗 Run tasks with Grunt (example for backup)
 - 🚄 Build faster
 - 🖥️ Ungit for version control (git) with a GUI
-- 📘 Runtime library for TypeScript helpers with tslib
-- 🗃️ Utility functions for working with ts-api-utils
 
 ---
 
@@ -33,7 +31,6 @@ Instant Value - All basic tools included and configured:
 To use this template, use the following commands:
 
 ```bash
-curl -fsSL https://bun.sh/install | bash # if you don't have bun installed
 bun create github.com/RajaRakoto/cli-boilerplate <project-name>
 cd <project-name>
 bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
