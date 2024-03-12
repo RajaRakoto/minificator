@@ -4,19 +4,14 @@
 
 ![Git](https://img.shields.io/badge/-Git-777?style=flat&logo=git&logoColor=F05032&labelColor=ffffff) ![Gitub](https://img.shields.io/badge/-Gitub-777?style=flat&logo=github&logoColor=777&labelColor=ffffff)
 
-**Developer Ready: A versatile template designed to jumpstart CLI development with Inquirer.js in TypeScript. Engineered to seamlessly integrate with various CLI projects, ensuring smooth compatibility with a pre-configured environment**
+**Developer Ready: A versatile template designed to jumpstart CLI development in TypeScript - Engineered to seamlessly integrate with various CLI projects, ensuring smooth compatibility with a pre-configured environment**
 
 Instant Value - All basic tools included and configured:
 
 - 🚀 Typescript >= 5.3
 - 🧅 Bun.js >= 1.0.26
 - 🧅 Use Bun as package manager
-- 🔳 Inquirer.js - A collection of common interactive command line user interfaces
-- 🔳 Execa - A process execution library that supports synchronous and asynchronous execution of child processes
-- 🔳 Figlet - A program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
-- 🔳 Node-emoji - A library that provides a simple way to use emojis in your CLI
-- 🔳 Ora - A terminal spinner library that allows you to add a loading spinner to your CLI
-- 🔳 Chalk - A library for styling terminal strings with colors and text styles
+- 🧪 A lightweight private npm proxy registry with Verdaccio, useful for testing your CLI
 - 🌈 ESM
 - 🧹 ESlint with some initial rules recommendation
 - ✅ Jest or Bun test for fast unit testing and code coverage
@@ -28,6 +23,12 @@ Instant Value - All basic tools included and configured:
 - 🐗 Run tasks with Grunt (example for backup)
 - 🚄 Build faster
 - 🖥️ Ungit for version control (git) with a GUI
+- 🔳 Inquirer.js - A collection of common interactive command line user interfaces
+- 🔳 Execa - A process execution library that supports synchronous and asynchronous execution of child processes
+- 🔳 Figlet - A program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
+- 🔳 Node-emoji - A library that provides a simple way to use emojis in your CLI
+- 🔳 Ora - A terminal spinner library that allows you to add a loading spinner to your CLI
+- 🔳 Chalk - A library for styling terminal strings with colors and text styles
 
 ---
 
