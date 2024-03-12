@@ -3,7 +3,6 @@
 		"target": "ESNext",
 		"module": "ESNext",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
-		"jsx": "react-jsx",
 		"verbatimModuleSyntax": true,
 		"moduleResolution": "bundler",
 		"moduleDetection": "force",
@@ -31,6 +30,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true
 	},
-	"include": ["src/**/*", "tests/**/*"],
+	"include": ["src/**/*", "tests/**/*", "utils/**/*"],
 	"exclude": ["node_modules"]
 }
