@@ -11,7 +11,12 @@ Instant Value - All basic tools included and configured:
 - 🚀 Typescript >= 5.3
 - 🧅 Bun.js >= 1.0.26
 - 🧅 Use Bun as package manager
-- 🔳 Inquirer.js >= 9.2.15
+- 🔳 Inquirer.js - A collection of common interactive command line user interfaces
+- 🔳 Execa - A process execution library that supports synchronous and asynchronous execution of child processes
+- 🔳 Figlet - A program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
+- 🔳 Node-emoji - A library that provides a simple way to use emojis in your CLI
+- 🔳 Ora - A terminal spinner library that allows you to add a loading spinner to your CLI
+- 🔳 Chalk - A library for styling terminal strings with colors and text styles
 - 🌈 ESM
 - 🧹 ESlint with some initial rules recommendation
 - ✅ Jest or Bun test for fast unit testing and code coverage
@@ -43,29 +48,56 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 
 ### 📌 Scripts 
 
-- 📜 `start` - run your application with bun
-- 📜 `start:smol` - run your application with bun and a flag which configures the JavaScriptCore heap size to be smaller and grow slower ...
-- 📜 `start:bin` - run your standalone binary app
-- 📜 `clean` - remove coverage data, prod, build ...
-- 📜 `dev` - execute app in a development environment, useful for seeing normal app behavior without interactive watch mode
-- 📜 `dev:watch` - interactive watch mode to automatically transpile source files with bun in development
-- 📜 `dev:hot` - hot reloading of source files with bun in development
-- 📜 `dev:smol:watch` - interactive watch mode to automatically transpile source files with bun in development, while using --smol flag
-- 📜 `dev:smol:hot` - hot reloading source files with bun in development, while using --smol flag
-- 📜 `build` - transpile and bundle source files with bun
-- 📜 `build:watch` - interactive watch mode to automatically transpile source files with bun
+**Start**
+- 📜 `start` - Run your application with bun.
+- 📜 `start:smol` - Run your application with bun and a flag which configures the JavaScriptCore heap size to be smaller and grow slower.
+- 📜 `start:bin` - Run your standalone binary app.
+
+**Clean**
+- 📜 `clean` - Remove coverage data, prod, build.
+
+**Development**
+- 📜 `dev` - Launch your application in development mode with bun.
+- 📜 `dev:watch` - Interactive watch mode to automatically transpile source files with bun in development.
+- 📜 `dev:hot` - Hot reloading of source files with bun in development.
+- 📜 `dev:smol:watch` - Interactive watch mode to automatically transpile source files with bun in development, while using --smol flag.
+- 📜 `dev:smol:hot` - Hot reloading source files with bun in development, while using --smol flag.
+
+**Build**
+- 📜 `build` - Transpile and bundle source files with bun.
+- 📜 `build:watch` - Interactive watch mode to automatically transpile source files with bun.
 - 📜 `build:bin` - bun's bundler implements a --compile flag for generating a standalone binary from a TypeScript or JavaScript file, use this in your production environment to ensure optimal execution of your app.
-- 📜 `test` - run bun test
-- 📜 `test:watch` - interactive watch mode to automatically re-run tests with bun
-- 📜 `eslint` - lint source files with ESlint
-- 📜 `prettier` - reformat source files with Prettier
-- 📜 `backup` - backup files with Grunt
-- 📜 `pkg-check` - check useless dependencies with depcheck
-- 📜 `pkg-upgrade` - upgrade outdated dependencies (interactive mode) with npm-check-updates
-- 📜 `versioning` - start ungit server 
-- 📜 `version-major`: Increments the major version number of your project
-- 📜 `version-minor`: Increments the minor version number of your project
-- 📜 `version-patch`: Increments the version patch number of your project
+
+**Testing**
+- 📜 `test` - Run bun test.
+- 📜 `test:watch` - Interactive watch mode to automatically re-run tests with bun.
+
+**Linting and Formatting**
+- 📜 `eslint` - Lint source files with ESLint.
+- 📜 `prettier` - Reformat source files with Prettier.
+
+**Backup and Dependency Management**
+- 📜 `backup` - Backup files with Grunt.
+- 📜 `pkg-check` - Check useless dependencies with depcheck.
+- 📜 `pkg-upgrade` - Upgrade outdated dependencies (interactive mode) with npm-check-updates.
+
+**Versioning**
+- 📜 `versioning` - Start ungit server.
+
+**npm Commands**
+- 📜 `npm-version:major` - Increments the major version number of your project using npm.
+- 📜 `npm-version:minor` - Increments the minor version number of your project using npm.
+- 📜 `npm-version:patch` - Increments the version patch number of your project using npm.
+- 📜 `npm-login` - Login to a registry user account.
+- 📜 `npm-publish` - Publish your npm package with public access.
+- 📜 `npm-unpublish` - Forcefully unpublish the cli package from npm.
+- 📜 `npm-reset:registry` - Delete the custom npm registry.
+- 📜 `npm-check:registry` - Get the currently configured registry for npm.
+- 📜 `npm-proxy-set:registry` - Set the npm registry to use a local proxy.
+- 📜 `npm-proxy:start` - Start a Verdaccio server with a local npm proxy.
+- 📜 `npm-proxy:publish` - Publish your npm package via the local proxy.
+- 📜 `npm-proxy:unpublish` - Forcefully unpublish the cli package from the npm registry via the local proxy.
+- 📜 `npm-proxy:republish` - Republish your npm package by first unpublishing it and then publishing it again via the local proxy.
 
 ---
 
