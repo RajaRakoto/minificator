@@ -1,5 +1,4 @@
 /**
- * @author: Raja
  * @description: gruntfile for cli boilerplate
  * @requires: grunt | load-grunt-tasks | grunt-contrib-compress
  */
@@ -28,6 +27,15 @@ module.exports = function (grunt) {
         files: [{ src: ['./*', './.*'] }],
         filter: 'isFile',
       },
+      fonts: {
+        options: {
+          archive: backupsDestination + 'fonts.tar.gz',
+        },
+        expand: true,
+        cwd: './fonts/',
+        src: includeAllFiles,
+        dest: 'fonts',
+      },
       src: {
         options: {
           archive: backupsDestination + 'src.tar.gz',
@@ -55,22 +63,33 @@ module.exports = function (grunt) {
         src: includeAllFiles,
         dest: 'tmp',
       },
+      utils: {
+        options: {
+          archive: backupsDestination + 'utils.tar.gz',
+        },
+        expand: true,
+        cwd: './utils/',
+        src: includeAllFiles,
+        dest: 'utils',
+      },
     },
   });
 
   // all grunt register tasks
   grunt.registerTask('backup', [
     'compress:main',
+    'compress:fonts',
     'compress:src',
     'compress:tests',
     'compress:tmp',
+    'compress:utils',
   ]);
 
   // all tasks lists
   const myTasksNames = ['backup'];
 
   // tasks status (description)
-  const myTasksStatus = ['compress: main | src | tests | tmp'];
+  const myTasksStatus = ['compress: main | fonts | src | tests | tmp | utils'];
 
   // default tasks
   grunt.registerTask('default', () => {
