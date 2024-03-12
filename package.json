@@ -15,6 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/RajaRakoto/cli-boilerplate.git"
   },
+  "homepage": "https://github.com/RajaRakoto/cli-boilerplate#readme",
   "bugs": "https://github.com/RajaRakoto/cli-boilerplate/issues",
   "files": [
     "dist"
