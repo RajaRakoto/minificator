@@ -87,6 +87,7 @@ module.exports = function (grunt) {
   // all grunt register tasks
   grunt.registerTask('backup', [
     'compress:main',
+    'compress:examples',
     'compress:fonts',
     'compress:src',
     'compress:tests',
@@ -101,7 +102,7 @@ module.exports = function (grunt) {
 
   // tasks status (description)
   const myTasksStatus = [
-    'compress: main | fonts | src | tests | tmp | utils',
+    'compress: main | examples | fonts | src | tests | tmp | utils',
     'copy: fonts > dist',
   ];
 
