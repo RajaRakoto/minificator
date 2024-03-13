@@ -27,6 +27,15 @@ module.exports = function (grunt) {
         files: [{ src: ['./*', './.*'] }],
         filter: 'isFile',
       },
+      examples: {
+        options: {
+          archive: backupsDestination + 'examples.tar.gz',
+        },
+        expand: true,
+        cwd: './examples/',
+        src: includeAllFiles,
+        dest: 'examples',
+      },
       fonts: {
         options: {
           archive: backupsDestination + 'fonts.tar.gz',
