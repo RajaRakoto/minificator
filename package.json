@@ -21,6 +21,7 @@
     "dist"
   ],
   "keywords": [
+    "cli",
     "typescript",
     "inquirerjs",
     "inquirer",
