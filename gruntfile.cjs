@@ -1,6 +1,6 @@
 /**
  * @description: gruntfile for cli boilerplate
- * @requires: grunt | load-grunt-tasks | grunt-contrib-compress
+ * @requires: grunt | load-grunt-tasks | grunt-contrib-compress | grunt-shell
  */
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
@@ -73,6 +73,15 @@ module.exports = function (grunt) {
         dest: 'utils',
       },
     },
+
+    /**
+      * Copy dist deps
+      */
+    shell: {
+      copyDistDeps: {
+        command: ['cp -r fonts dist'].join('&&'),
+      },
+    },
   });
 
   // all grunt register tasks
@@ -85,11 +94,16 @@ module.exports = function (grunt) {
     'compress:utils',
   ]);
 
+  grunt.registerTask('copy', ['shell:copyDistDeps']);
+
   // all tasks lists
-  const myTasksNames = ['backup'];
+  const myTasksNames = ['backup', 'copy'];
 
   // tasks status (description)
-  const myTasksStatus = ['compress: main | fonts | src | tests | tmp | utils'];
+  const myTasksStatus = [
+    'compress: main | fonts | src | tests | tmp | utils',
+    'copy: fonts > dist',
+  ];
 
   // default tasks
   grunt.registerTask('default', () => {
