@@ -1,55 +1,65 @@
 /* libs */
 import inquirer from 'inquirer';
-/* examples */
-import { dev_prompt } from './examples/list';
-import { pizza_prompt } from './examples/checkbox';
-import { expand_prompt } from './examples/expand';
-import { tvShowLists, recursive_prompt } from './examples/confirm';
-import { complex_prompt } from './examples/complex';
+import { Command } from 'commander';
+import * as emoji from 'node-emoji';
+/* menu */
+import { menu_prompt } from './menu';
+/* core */
+import { app } from './core/app';
+/* utils */
+import { bannerRenderer } from '../utils/ascii';
+import { exitCLI } from '../utils/extras';
+/* files */
+import pkg from '../package.json';
 
 // ==============================
 
-// type = input | list
-async function askDev(): Promise<void> {
-  const dev_answers = await inquirer.prompt(dev_prompt);
-  console.log(`Hello ${dev_answers.name}! You prefer ${dev_answers.language}.`);
-}
+export const devMode = false;
 
-// type = checkbox
-async function askPizza(): Promise<void> {
-  const pizza_answers = await inquirer.prompt(pizza_prompt);
-  console.dir(pizza_answers);
-}
+/**
+ * @description Entry point of the CLI
+ */
+export async function myCLI(): Promise<void> {
+  // show banner
+  const banner = await bannerRenderer(
+    'my-cli',
+    `Welcome to my CLI ! ${emoji.get('smile')}`,
+  );
+  console.log(`${banner}\n`);
 
-// type = expand
-async function askExpand(): Promise<void> {
-  const expand_answers = await inquirer.prompt(expand_prompt);
-  console.dir(expand_answers);
-}
+  // start menu
+  const menu_answers = await inquirer.prompt(menu_prompt);
 
-// type = input | confirm
-async function askRecursive(): Promise<void> {
-  const recursive_answers = await inquirer.prompt(recursive_prompt);
-  tvShowLists.push(recursive_answers.tvShow);
-  if (recursive_answers.askAgain) {
-    askRecursive();
-  } else {
-    console.log('tvShow lists: ', tvShowLists.join(', '));
-    await askComplex();
+  // switch menu
+  switch (menu_answers.menu) {
+    case 'option-1':
+      app('option 1');
+      break;
+    case 'option-2':
+      app('option 2');
+      break;
+    case 'option-3':
+      app('option 3');
+      break;
+    case 'exit':
+      exitCLI();
+      break;
+    default:
+      myCLI();
+      break;
   }
 }
 
-// type = input | password | number | list | confirm | checkbox | rawlist | editor
-async function askComplex(): Promise<void> {
-  const complex_answers = await inquirer.prompt(complex_prompt);
-  console.dir(complex_answers);
+function args(): void {
+  const packageVersion = pkg.version;
+  const program = new Command();
+  program.option('-v, --version', 'show CLI version');
+  program.parse(process.argv);
+  if (program.opts().version) {
+    console.log(`version ${packageVersion}`);
+  } else {
+    myCLI();
+  }
 }
 
-async function main(): Promise<void> {
-  await askDev();
-  await askPizza();
-  await askExpand();
-  await askRecursive(); // include askComplex()
-}
-
-main();
+args();
