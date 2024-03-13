@@ -30,6 +30,6 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true
 	},
-	"include": ["src/**/*", "tests/**/*", "utils/**/*"],
+	"include": ["src/**/*", "tests/**/*", "utils/**/*", "examples/**/*"],
 	"exclude": ["node_modules"]
 }
