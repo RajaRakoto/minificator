@@ -1,6 +1,6 @@
-import { restart } from './restart';
+import { restart } from "./restart";
 
 export function app(option: string): void {
-  console.log(`${option} selected !`);
-  restart();
+	console.log(`${option} selected !`);
+	restart();
 }
