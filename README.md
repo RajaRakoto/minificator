@@ -11,7 +11,6 @@ Instant Value - All basic tools included and configured:
 - 🚀 Typescript >= 5.3
 - 🧅 Bun.js >= 1.0.26
 - 🧅 Use Bun as package manager
-- 🧪 A lightweight private npm proxy registry with Verdaccio, useful for testing your CLI
 - 🌈 ESM
 - 🧹 ESlint with some initial rules recommendation
 - ✅ Jest or Bun test for fast unit testing and code coverage
@@ -23,6 +22,7 @@ Instant Value - All basic tools included and configured:
 - 🐗 Run tasks with Grunt (example for backup)
 - 🚄 Build faster
 - 🖥️ Ungit for version control (git) with a GUI
+- 🧪 A lightweight private npm proxy registry with Verdaccio, useful for testing your CLI
 - 🔳 Inquirer.js - A collection of common interactive command line user interfaces
 - 🔳 Execa - A process execution library that supports synchronous and asynchronous execution of child processes
 - 🔳 Figlet - A program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
@@ -32,7 +32,7 @@ Instant Value - All basic tools included and configured:
 
 ---
 
-### 📌 Using 
+### 📌 Usage 
 
 To use this template, use the following commands:
 
@@ -42,8 +42,11 @@ cd <project-name>
 bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 ```
 
-> NOTE: I use MIT license for this starter which contains my name and my github profile, don't forget to modify it
-> Similarly, for certain configurations in the package.json file, you need to modify them to tailor them to your project (e.g., name, description, author, keywords, main, repository, ...).
+> NOTE 1: I employ the `MIT license` for this starter kit, which includes my name and GitHub profile. Please remember to adjust or remove it if deemed unnecessary.
+
+> NOTE 2: In order to help you better understand the structure of this boilerplate, there is a `README.md` file in each subdirectory of src.
+
+> NOTE 3: For certain configurations in the `package.json` file, you need to modify them to tailor them to your project (e.g: name, description, author, keywords, main, repository, ...).
 
 ---
 
