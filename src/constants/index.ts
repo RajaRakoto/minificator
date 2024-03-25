@@ -1,2 +1,2 @@
 // api
-export const DEVMODE = false;
+export const DEVMODE = true;
