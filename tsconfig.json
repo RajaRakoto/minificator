@@ -28,8 +28,14 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-		"isolatedModules": true
+		"isolatedModules": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": false,
+		"noUncheckedIndexedAccess": false,
+		"paths": {
+			"@/*": ["./src/*"]
+		}
 	},
-	"include": ["src/**/*", "tests/**/*", "utils/**/*", "examples/**/*"],
+	"include": ["*.ts", "**/*.ts"],
 	"exclude": ["node_modules"]
 }
