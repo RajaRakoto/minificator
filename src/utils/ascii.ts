@@ -2,15 +2,19 @@
 import figlet from "figlet";
 import chalk from "chalk";
 import fs from "fs";
+
 /* files */
-import pkg from "../package.json";
+import pkg from "../../package.json";
+
+/* constants */
+import { DEVMODE } from "@/constants";
+
 /* utils */
-import { resolveRealPath } from "./extras";
+import { resolveRealPath } from "@/utils/extras";
 
 // ==============================
 
-const devMode = true;
-const fontPath = devMode
+const fontPath = DEVMODE
 	? "./fonts/Standard.flf"
 	: resolveRealPath("./fonts/Standard.flf");
 const font = fs.readFileSync(fontPath, "utf8");
