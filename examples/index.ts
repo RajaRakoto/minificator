@@ -1,5 +1,6 @@
 /* libs */
 import inquirer from "inquirer";
+
 /* examples */
 import { dev_prompt } from "./core/list";
 import { pizza_prompt } from "./core/checkbox";
