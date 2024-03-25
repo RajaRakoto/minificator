@@ -66,7 +66,8 @@
     "npm-proxy:start": "bun run npm-proxy-set:registry && verdaccio",
     "npm-proxy:publish": "npm publish --registry http://localhost:4873/",
     "npm-proxy:unpublish": "npm unpublish --force --registry http://localhost:4873/ cli-boilerplate",
-    "npm-proxy:republish": "bun run npm-proxy:unpublish && bun run npm-proxy:publish"
+    "npm-proxy:republish": "bun run npm-proxy:unpublish && bun run npm-proxy:publish",
+    "nvm": "nvm use"
   },
   "dependencies": {
     "commander": "^12.0.0",
