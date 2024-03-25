@@ -18,6 +18,7 @@ Instant Value - All basic tools included and configured:
 - 🎨 Prettier to enforce consistent code style
 - ⚙️ EditorConfig for consistent coding style
 - 📦 NPM scripts for common operations
+- 🛠️ Example configuration for GitHub Actions
 - 📝 Simple example of TypeScript code and unit test
 - 🐗 Run tasks with Grunt (example for backup)
 - 🚄 Build faster
@@ -50,7 +51,7 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 
 ---
 
-### 📌 Scripts 
+### 📌 NPM Scripts
 
 **Start**
 - 📜 `start` - Run your application with bun.
@@ -88,7 +89,7 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 **Versioning**
 - 📜 `versioning` - Start ungit server.
 
-**npm Commands**
+**NPM Commands**
 - 📜 `npm-version:major` - Increments the major version number of your project using npm.
 - 📜 `npm-version:minor` - Increments the minor version number of your project using npm.
 - 📜 `npm-version:patch` - Increments the version patch number of your project using npm.
@@ -102,6 +103,10 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 - 📜 `npm-proxy:publish` - Publish your npm package via the local proxy.
 - 📜 `npm-proxy:unpublish` - Forcefully unpublish the cli package from the npm registry via the local proxy.
 - 📜 `npm-proxy:republish` - Republish your npm package by first unpublishing it and then publishing it again via the local proxy.
+
+**NVM**
+
+- 📜 `nvm` - Manage multiple node.js versions. Easily switch between node versions per project to ensure compatibility.
 
 ---
 
@@ -119,5 +124,5 @@ You can also check out my other starter projects:
 - 🚀 [bun-boilerplate](https://github.com/RajaRakoto/bun-boilerplate)
 - 🚀 [react-boilerplate](https://github.com/RajaRakoto/react-boilerplate)
 - 🚀 [next-boilerplate](https://github.com/RajaRakoto/next-boilerplate)
-- 🚀 [quik-boilerplate](https://github.com/RajaRakoto/quik-boilerplate)
+- 🚀 [qwik-boilerplate](https://github.com/RajaRakoto/qwik-boilerplate)
 - 🚀 [vscode-boilerplate](https://github.com/RajaRakoto/vscode-boilerplate)
