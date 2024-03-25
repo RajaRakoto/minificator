@@ -1,10 +1,13 @@
 /* libs */
 import inquirer from "inquirer";
 import chalk from "chalk";
+
 /* index */
-import { myCLI } from "..";
+import { myCLI } from "@/index";
+
 /* utils */
-import { exitCLI } from "../../utils/extras";
+import { exitCLI } from "@/utils/extras";
+
 /* types */
 import type { Ora } from "ora";
 
