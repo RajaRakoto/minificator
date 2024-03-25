@@ -8,9 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # production
-*.local
+build
+dist
 
 # dependencies
+.pnp
+.pnp.js
+.yarn/install-state.gz
 node_modules
 bower_components
 jspm_packages
@@ -40,10 +44,6 @@ lib-cov
 .lock-wscript
 
 # editor
-.vscode
-!.vscode/tasks.js
-!.vscode/extensions.json
-.vscode-test
 .idea
 .DS_Store
 *.suo
@@ -68,7 +68,7 @@ typings
 
 # dotenv environment variables file
 .env
-.env.test
+.env.local
 
 # output
 *.tgz
