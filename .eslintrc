@@ -6,7 +6,7 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
+    "project": "./tsconfig.json",
     "sourceType": "module",
     "ecmaVersion": "latest"
   },
@@ -23,6 +23,7 @@
     }
   ],
   "rules": {
+    "no-unused-vars": "warn",
     "@typescript-eslint/explicit-function-return-type": "warn"
   }
 }
