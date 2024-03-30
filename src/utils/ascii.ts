@@ -6,18 +6,18 @@ import fs from "fs";
 /* files */
 import pkg from "../../package.json";
 
-/* constants */
-import { DEVMODE } from "@/constants";
-
 /* utils */
 import { resolveRealPath } from "@/utils/extras";
 
+/* constants */
+import { DEVMODE, FONT_PATH } from "@/constants";
+
 // ==============================
 
-const fontPath = DEVMODE
-	? "./fonts/Standard.flf"
-	: resolveRealPath("./fonts/Standard.flf");
-const font = fs.readFileSync(fontPath, "utf8");
+const fontSource = DEVMODE
+	? FONT_PATH
+	: resolveRealPath(FONT_PATH);
+const font = fs.readFileSync(fontSource, "utf8");
 figlet.parseFont("StandardFont", font);
 
 /**
