@@ -14,9 +14,7 @@ import { DEVMODE, FONT_PATH } from "@/constants";
 
 // ==============================
 
-const fontSource = DEVMODE
-	? FONT_PATH
-	: resolveRealPath(FONT_PATH);
+const fontSource = DEVMODE ? FONT_PATH : resolveRealPath(FONT_PATH);
 const font = fs.readFileSync(fontSource, "utf8");
 figlet.parseFont("StandardFont", font);
 
