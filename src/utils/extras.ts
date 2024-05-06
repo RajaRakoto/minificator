@@ -53,15 +53,14 @@ export async function defaultOpen(filePath: string): Promise<void> {
 				execCMD = "xdg-open";
 				break;
 			default:
-				console.error("\n\nError: Unsupported OS");
-				return;
+				throw new Error("[error]: unsupported os");
 		}
 
 		execCMD === "start"
 			? await open(realPath)
 			: await execa(execCMD, [realPath]);
 	} catch (error) {
-		console.error("\n\nError during opening:", error);
+		throw new Error(`[error]: error during opening: \n${error}`);
 	}
 }
 
