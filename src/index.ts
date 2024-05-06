@@ -25,7 +25,7 @@ export async function myCLI(): Promise<void> {
 	// show banner
 	const banner = await bannerRenderer(
 		"my-cli",
-		`Welcome to my CLI ! ${emoji.get("smile")}`,
+		`${pkg.description}`,
 	);
 	console.log(`${banner}\n`);
 
