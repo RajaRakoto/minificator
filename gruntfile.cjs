@@ -81,15 +81,6 @@ module.exports = function (grunt) {
 				src: includeAllFiles,
 				dest: "tmp",
 			},
-			utils: {
-				options: {
-					archive: backupsDestination + "utils.tar.gz",
-				},
-				expand: true,
-				cwd: "./utils/",
-				src: includeAllFiles,
-				dest: "utils",
-			},
 		},
 
 		/**
@@ -111,7 +102,6 @@ module.exports = function (grunt) {
 		"compress:src",
 		"compress:tests",
 		"compress:tmp",
-		"compress:utils",
 	]);
 
 	grunt.registerTask("copy", ["shell:copyDistDeps"]);
@@ -121,7 +111,7 @@ module.exports = function (grunt) {
 
 	// tasks status (description)
 	const myTasksStatus = [
-		"compress: main | github | examples | fonts | src | tests | tmp | utils",
+		"compress: main | github | examples | fonts | src | tests | tmp",
 		"copy: fonts > dist",
 	];
 
