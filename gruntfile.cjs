@@ -1,5 +1,5 @@
 /**
- * @description: gruntfile for cli boilerplate
+ * @description: gruntfile for minificator
  * @requires: grunt | load-grunt-tasks | grunt-contrib-compress | grunt-shell
  */
 module.exports = function (grunt) {
@@ -162,7 +162,7 @@ module.exports = function (grunt) {
 
 		// task resume
 		getTaskResume(
-			"== CLI BOILERPLATE TASKS ==",
+			"== MINIFICATOR TASKS ==",
 			myTasksNames,
 			myTasksStatus,
 			"yellow",

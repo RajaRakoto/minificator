@@ -3,7 +3,7 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 
 /* index */
-import { myCLI } from "@/index";
+import { minificatorCLI } from "@/index";
 
 /* utils */
 import { exitCLI } from "@/utils/extras";
@@ -26,7 +26,7 @@ export async function restart(spinner?: Ora): Promise<void> {
 	if (spinner) spinner.stop();
 	const restart_answers = await inquirer.prompt(restart_prompt);
 	if (restart_answers.restart) {
-		myCLI();
+		minificatorCLI();
 	} else {
 		exitCLI();
 	}
