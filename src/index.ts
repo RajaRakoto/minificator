@@ -1,7 +1,6 @@
 /* libs */
 import inquirer from "inquirer";
 import { Command } from "commander";
-import * as emoji from "node-emoji";
 
 /* menu */
 import { menu_prompt } from "@/menu";
@@ -23,10 +22,7 @@ import pkg from "../package.json";
  */
 export async function myCLI(): Promise<void> {
 	// show banner
-	const banner = await bannerRenderer(
-		"my-cli",
-		`${pkg.description}`,
-	);
+	const banner = await bannerRenderer("my-cli", `${pkg.description}`);
 	console.log(`${banner}\n`);
 
 	// start menu
