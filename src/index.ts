@@ -1,6 +1,7 @@
 /* libs */
 import inquirer from "inquirer";
 import { Command } from "commander";
+import chalk from "chalk";
 
 /* menu */
 import { menu_prompt } from "@/menu";
@@ -24,6 +25,9 @@ export async function minificatorCLI(): Promise<void> {
 	// show banner
 	const banner = await bannerRenderer("minificator", `${pkg.description}`);
 	console.log(`${banner}\n`);
+
+	// working directory
+	console.log(`${chalk.bold("=> Working directory:")} ${process.cwd()}`);
 
 	// start menu
 	const menu_answers = await inquirer.prompt(menu_prompt);
