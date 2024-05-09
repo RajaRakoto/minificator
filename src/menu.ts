@@ -14,7 +14,7 @@ export const menu_prompt = [
 		choices: [
 			new inquirer.Separator("=============== option list =============="),
 			{
-				name: `${emoji.get("wrench")} Minify all images (jpg, png, svg, gif)`,
+				name: `${emoji.get("wrench")} Minify all images (jpg, png, webp, gif, svg)`,
 				value: "min-images",
 			},
 			new inquirer.Separator("=========================================="),
