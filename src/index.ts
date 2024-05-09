@@ -6,7 +6,7 @@ import { Command } from "commander";
 import { menu_prompt } from "@/menu";
 
 /* core */
-// import { minImages } from "@/core/images";
+import { minImages } from "@/core/images";
 
 /* utils */
 import { bannerRenderer } from "@/utils/ascii";
@@ -31,8 +31,7 @@ export async function minificatorCLI(): Promise<void> {
 	// switch menu
 	switch (menu_answers.menu) {
 		case "min-images":
-			// minImages();
-			console.log("test");
+			minImages();
 			break;
 		case "exit":
 			exitCLI();
