@@ -10,21 +10,24 @@ import { restart } from "@/core/restart";
 import { getImageFilesByExtension } from "@/utils/extras";
 
 /* constants */
-// import { INPUT_IMAGES_PATH, OUTPUT_IMAGES_PATH } from "@/constants";
+import { INPUT_IMAGES_PATH, OUTPUT_IMAGES_PATH } from "@/constants";
 
 /* types */
-// import { T_SharpImage } from "@/@types";
+import { T_SharpExtension } from "@/@types";
 
 // ==============================
 
-async function sharpJPG(qualityValue: number): Promise<void> {
-	const files = ["input-onlinejpgtools.jpg", "test.jpeg", "test.JPEG"];
+async function sharpCompress(
+	files: string[],
+	qualityValue: number,
+	extension: T_SharpExtension,
+): Promise<void> {
 	console.log("Starting compression ...\n");
 
 	for (const file of files) {
-		await sharp(`./tests/${file}`)
-			.jpeg({ quality: qualityValue })
-			.toFile(`./tests/minificator/images/${file}`, (error) => {
+		await sharp(`${INPUT_IMAGES_PATH}/${file}`)
+			[extension]({ quality: qualityValue })
+			.toFile(`${OUTPUT_IMAGES_PATH}/${file}`, (error) => {
 				if (error) {
 					throw new Error(`[error]: compression failed: \n${error}`);
 				} else {
@@ -47,7 +50,7 @@ export async function minImages(): Promise<void> {
 	// const WEBP_files = await getImageFilesByExtension("webp");
 
 	if (JPEG_files.length > 0) {
-		await sharpJPG(50);
+		await sharpCompress(JPEG_files, 50, "jpeg");
 	}
 
 	// if (PNG_files.length > 0) {
@@ -58,6 +61,5 @@ export async function minImages(): Promise<void> {
 	// 	await sharpCompress(WEBP_files, 50, "webp");
 	// }
 
-	// console.log(JPEG_files);
 	restart();
 }
