@@ -88,3 +88,12 @@ typings
 # own
 backups
 tmp
+tests/images
+tests/minificator
+tests/origin
+tests/*.[jJ][pP][gG]
+tests/*.[jJ][pP][eE][gG]
+tests/*.[pP][nN][gG]
+tests/*.[wW][eE][bB][pP]
+tests/*.[gG][iI][fF]
+tests/*.[sS][vV][gG]
