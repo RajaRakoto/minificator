@@ -1,1 +1,1 @@
-export type T_SharpExtension = "jpeg" | "png" | "webp";
+export type T_SharpExtension = "jpg" | "jpeg" | "png" | "webp";
