@@ -72,7 +72,8 @@
 		"figlet": "^1.7.0",
 		"inquirer": "^9.2.20",
 		"node-emoji": "^2.1.3",
-		"ora": "^8.0.1"
+		"ora": "^8.0.1",
+		"sharp": "^0.33.3"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
@@ -83,6 +84,7 @@
 		"@types/jest": "^29.5.12",
 		"@types/node-emoji": "^2.1.0",
 		"@types/ora": "^3.2.0",
+		"@types/sharp": "^0.32.0",
 		"@typescript-eslint/eslint-plugin": "^7.8.0",
 		"@typescript-eslint/parser": "^7.8.0",
 		"bun-plugin-dts": "^0.2.3",
