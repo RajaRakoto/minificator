@@ -53,15 +53,15 @@ const quality_prompt = [
 		message: "Enter the quality level",
 		choices: [
 			{
-				name: "High Compression | Slight Quality Loss",
+				name: "High Compression > Slight Quality Loss",
 				value: 30,
 			},
 			{
-				name: "Balanced Compression | Recommended",
+				name: "Balanced Compression > Recommended",
 				value: 50,
 			},
 			{
-				name: "Low Compression | High Quality",
+				name: "Low Compression > High Quality",
 				value: 70,
 			},
 		],
