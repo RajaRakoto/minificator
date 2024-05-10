@@ -1,11 +1,7 @@
-import { expect, test, describe } from "bun:test";
+import { sharpTest } from "@/utils/extras";
 
-describe("arithmetic", () => {
-	test("2 + 2 = 4", () => {
-		expect(2 + 2).toBe(4);
-	});
+const qualityValue = 70;
 
-	test("2 * 2 = 4", () => {
-		expect(2 * 2).toBe(4);
-	});
-});
+sharpTest("test.jpg", qualityValue, "jpeg");
+sharpTest("test.png", qualityValue, "png");
+sharpTest("test.webp", qualityValue, "webp");
