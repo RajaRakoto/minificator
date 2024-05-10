@@ -7,7 +7,7 @@ import chalk from "chalk";
 import { menu_prompt } from "@/menu";
 
 /* core */
-import { minImages } from "@/core/images";
+import { minImages } from "@/core/min-images";
 
 /* utils */
 import { bannerRenderer } from "@/utils/ascii";
