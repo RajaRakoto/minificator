@@ -83,21 +83,25 @@ async function sharpCompress(
 	};
 
 	const promises = files.map((file) => {
+		const input = `${INPUT_IMAGES_PATH}/${file}`;
+		const output = `${OUTPUT_IMAGES_PATH}/${file}`;
+
 		return new Promise<void>((resolve, reject) => {
 			let transform: sharp.Sharp;
+
 			switch (extension) {
 				case "jpeg":
-					transform = sharp(`${INPUT_IMAGES_PATH}/${file}`).jpeg({
+					transform = sharp(input).jpeg({
 						quality: qualityValue,
 					});
 					break;
 				case "png":
-					transform = sharp(`${INPUT_IMAGES_PATH}/${file}`).png({
+					transform = sharp(input).png({
 						quality: qualityValue,
 					});
 					break;
 				case "webp":
-					transform = sharp(`${INPUT_IMAGES_PATH}/${file}`).webp({
+					transform = sharp(input).webp({
 						quality: qualityValue,
 					});
 					break;
@@ -106,7 +110,7 @@ async function sharpCompress(
 					return;
 			}
 
-			transform.toFile(`${OUTPUT_IMAGES_PATH}/${file}`, (error) => {
+			transform.toFile(output, (error) => {
 				if (error) {
 					reject(errorMessage(error));
 				} else {
