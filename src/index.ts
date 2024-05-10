@@ -8,6 +8,7 @@ import { menu_prompt } from "@/menu";
 
 /* core */
 import { minImages } from "@/core/min-images";
+import { resizeImages } from "@/core/resize-images";
 
 /* utils */
 import { bannerRenderer } from "@/utils/ascii";
@@ -36,6 +37,9 @@ export async function minificatorCLI(): Promise<void> {
 	switch (menu_answers.menu) {
 		case "min-images":
 			minImages();
+			break;
+		case "resize-images":
+			resizeImages();
 			break;
 		case "exit":
 			exitCLI();

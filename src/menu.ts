@@ -12,10 +12,14 @@ export const menu_prompt = [
 		loop: false,
 		pageSize: 15,
 		choices: [
-			new inquirer.Separator("=============== option list =============="),
+			new inquirer.Separator("================= images ================="),
 			{
-				name: `${emoji.get("wrench")} Minify all images (jpg, png, webp, gif, svg)`,
+				name: `${emoji.get("wrench")} Minify JPEG|PNG|WEBP|GIF|SVG`,
 				value: "min-images",
+			},
+			{
+				name: `${emoji.get("wrench")} Resize JPEG|PNG|WEBP`,
+				value: "resize-images",
 			},
 			new inquirer.Separator("=========================================="),
 			{
