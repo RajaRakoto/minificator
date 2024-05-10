@@ -97,7 +97,7 @@ async function sharpCompress(
 					break;
 				case "png":
 					transform = sharp(input).png({
-						quality: qualityValue,
+						quality: qualityValue + 10,
 					});
 					break;
 				case "webp":
