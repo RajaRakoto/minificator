@@ -28,7 +28,7 @@ export async function minificatorCLI(): Promise<void> {
 	console.log(`${banner}\n`);
 
 	// working directory
-	console.log(`${chalk.bold("=> Working directory:")} ${process.cwd()}`);
+	console.log(`${chalk.bold("=> Working directory:")} ${process.cwd()}\n`);
 
 	// start menu
 	const menu_answers = await inquirer.prompt(menu_prompt);

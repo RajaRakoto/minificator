@@ -1,4 +1,4 @@
-import { sharpTest } from "@/utils/extras";
+import { sharpTest } from "@/utils/images";
 
 const qualityValue = 70;
 
