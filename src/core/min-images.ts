@@ -8,10 +8,11 @@ import * as emoji from "node-emoji";
 import { restart } from "@/core/restart";
 
 /* utils */
-import { getImageFilesByExtension } from "@/utils/extras";
+import { createDirectory } from "@/utils/extras";
+import { getImageFilesByExtension } from "@/utils/images";
 
 /* constants */
-import { INPUT_IMAGES_PATH, OUTPUT_IMAGES_PATH } from "@/constants";
+import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 
 /* types */
 import { T_SharpExtension } from "@/@types";
@@ -84,7 +85,7 @@ async function sharpCompress(
 
 	const promises = files.map((file) => {
 		const input = `${INPUT_IMAGES_PATH}/${file}`;
-		const output = `${OUTPUT_IMAGES_PATH}/${file}`;
+		const output = `${OUTPUT_MIN_IMAGES_PATH}/${file}`;
 
 		return new Promise<void>((resolve, reject) => {
 			let transform: sharp.Sharp;
@@ -145,7 +146,16 @@ export async function minImages(): Promise<void> {
 		if (extension_answers.extension.includes("webp"))
 			WEBP_files = await getImageFilesByExtension("webp");
 
-		console.log("Starting minification ...");
+		if (
+			JPEG_files.length === 0 &&
+			PNG_files.length === 0 &&
+			WEBP_files.length === 0
+		) {
+			console.log(chalk.yellow("No images found to minify !"));
+		} else {
+			console.log("Starting minification ...");
+			await createDirectory(OUTPUT_MIN_IMAGES_PATH);
+		}
 
 		if (JPEG_files.length > 0) await sharpCompress(JPEG_files, level, "jpeg");
 		if (PNG_files.length > 0) await sharpCompress(PNG_files, level, "png");
