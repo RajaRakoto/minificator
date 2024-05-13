@@ -144,7 +144,20 @@ export async function resizeImages(): Promise<void> {
 
 		if (resize_answers.resize === "manual") {
 			const manual_answers = await inquirer.prompt(manual_prompt);
-			console.log(manual_answers);
+			const width_answers = await inquirer.prompt(resolutionPrompt("width"));
+			const height_answers = await inquirer.prompt(resolutionPrompt("height"));
+
+			if (manual_answers.manual.length === 0) {
+				console.log(chalk.yellow("No images selected to resize !"));
+			} else {
+				console.log("Starting resizing ...");
+				await createDirectory(OUTPUT_RESIZE_IMAGES_PATH);
+				await sharpResize(
+					[manual_answers.manual],
+					width_answers.width,
+					height_answers.height,
+				);
+			}
 		}
 
 		restart();
