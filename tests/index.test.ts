@@ -1,14 +1,46 @@
 /* utils */
-import { sharpTest, svgGoTestAsync } from "@/utils/images";
+import {
+	sharpTestAsync,
+	svgGoTestAsync,
+	getAllImageFilesAsync,
+} from "@/utils/images";
+import { createDirectoryAsync } from "@/utils/extras";
+
+/* constants */
+import { OUTPUT_RESIZE_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 
 // ==============================
 
-// test JPEG, PNG, WEBP sharp compression
-const qualityValue = 70;
+async function test() {
+	try {
+		// create output directory
+		await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
+		await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
 
-sharpTest("test.jpg", qualityValue, "jpeg");
-sharpTest("test.png", qualityValue, "png");
-sharpTest("test.webp", qualityValue, "webp");
+		// test JPEG, PNG, WEBP sharp compression
+		const qualityValue = 70;
 
-// test SVGgo compression
-svgGoTestAsync();
+		await sharpTestAsync("test.jpg", qualityValue, "jpeg");
+		await sharpTestAsync("test.png", qualityValue, "png");
+		await sharpTestAsync("test.webp", qualityValue, "webp");
+
+		// test SVGgo compression
+		await svgGoTestAsync();
+
+		// test getting all image files by extension
+		await getAllImageFilesAsync([
+			"jpg",
+			"jpeg",
+			"png",
+			"webp",
+			"gif",
+			"svg",
+		]).then((files) => {
+			console.log(files);
+		});
+	} catch (error) {
+		throw new Error(`[error]: error during tests: \n${error}`);
+	}
+}
+
+test();
