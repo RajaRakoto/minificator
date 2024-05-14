@@ -1,10 +1,16 @@
+/* libs */
 import sharp from "sharp";
+import { optimize } from "svgo";
 
 /* constants */
 import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 
 /* utils */
-import { readDirAsync } from "@/utils/extras";
+import {
+	readDirAsync,
+	readFromFileAsync,
+	writeToFileAsync,
+} from "@/utils/extras";
 
 /* types */
 import { T_ImageExtension, T_SharpExtension } from "@/@types";
@@ -15,7 +21,7 @@ import { T_ImageExtension, T_SharpExtension } from "@/@types";
  * @description A function to get image file names with a specific extension from a directory
  * @param extension The desired file extension ("jpg", "jpeg", "png", "webp", "gif", "svg")
  */
-export async function getImageFilesByExtension(
+export async function getImageFilesByExtensionAsync(
 	extension: T_ImageExtension,
 ): Promise<string[]> {
 	try {
@@ -32,7 +38,7 @@ export async function getImageFilesByExtension(
 /**
  * @description A function to get all image file ("jpg", "jpeg", "png", "webp") names from a directory
  */
-export async function getAllImageFiles(): Promise<string[]> {
+export async function getAllImageFilesAsync(): Promise<string[]> {
 	try {
 		const files = await readDirAsync(INPUT_IMAGES_PATH);
 		const imageFiles = files.filter((file) =>
@@ -100,5 +106,27 @@ export function sharpTest(
 					console.log("WEBP -> sharp test successful !");
 				}
 			});
+	}
+}
+
+/**
+ * @description A function to test svgo image minification
+ */
+export async function svgGoTestAsync() {
+	try {
+		const svgCompress = optimize(
+			await readFromFileAsync(`${INPUT_IMAGES_PATH}/test.svg`),
+			{
+				multipass: true,
+			},
+		);
+
+		await writeToFileAsync(
+			`${OUTPUT_MIN_IMAGES_PATH}/test.svg`,
+			svgCompress.data,
+			"SVG -> svgo test successful !",
+		);
+	} catch (error) {
+		throw new Error(`[error]: error during SVGgo compression: \n${error}`);
 	}
 }

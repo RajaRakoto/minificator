@@ -6,7 +6,7 @@ import chalk from "chalk";
 import pkg from "../../package.json";
 
 /* utils */
-import { resolveRealPath, readFileAsync } from "@/utils/extras";
+import { resolveRealPathAsync, readFileAsync } from "@/utils/extras";
 
 /* constants */
 import { DEVMODE, FONT_PATH } from "@/constants";
@@ -22,7 +22,9 @@ export async function bannerRenderer(
 	title: string,
 	description: string,
 ): Promise<string> {
-	const fontSource = DEVMODE ? FONT_PATH : await resolveRealPath(FONT_PATH);
+	const fontSource = DEVMODE
+		? FONT_PATH
+		: await resolveRealPathAsync(FONT_PATH);
 	const font = await readFileAsync(fontSource, "utf8");
 	figlet.parseFont("StandardFont", font);
 

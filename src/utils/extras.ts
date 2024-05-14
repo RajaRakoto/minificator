@@ -31,7 +31,9 @@ export function exitCLI(): void {
  * @param relativePath The relative path of the file
  * @returns The real path of the file
  */
-export async function resolveRealPath(relativePath: string): Promise<string> {
+export async function resolveRealPathAsync(
+	relativePath: string,
+): Promise<string> {
 	try {
 		const sourceIndex = await realPathAsync(process.argv[1]);
 		const realPath = path.join(path.dirname(sourceIndex), relativePath);
@@ -45,10 +47,10 @@ export async function resolveRealPath(relativePath: string): Promise<string> {
  * @description A function that opens a file using the default application
  * @param filePath The path of the file to open
  */
-export async function defaultOpen(filePath: string): Promise<void> {
+export async function defaultOpenAsync(filePath: string): Promise<void> {
 	try {
 		const platform = process.platform;
-		const realPath = DEVMODE ? filePath : await resolveRealPath(filePath);
+		const realPath = DEVMODE ? filePath : await resolveRealPathAsync(filePath);
 		let execCMD: string = "";
 
 		switch (platform) {
@@ -81,9 +83,12 @@ export async function defaultOpen(filePath: string): Promise<void> {
  * @param source The source file
  * @param target The target file
  */
-export async function copyFile(source: string, target: string): Promise<void> {
+export async function copyFileAsync(
+	source: string,
+	target: string,
+): Promise<void> {
 	try {
-		const realSource = DEVMODE ? source : await resolveRealPath(source);
+		const realSource = DEVMODE ? source : await resolveRealPathAsync(source);
 		const targetDir = path.resolve(path.join(process.cwd(), target));
 
 		if (!fs.existsSync(targetDir)) {
@@ -101,11 +106,11 @@ export async function copyFile(source: string, target: string): Promise<void> {
  * @description This function creates the directory as argument from the current directory
  * @param directory The directory to create
  */
-export async function createDirectory(directory: string): Promise<void> {
+export async function createDirectoryAsync(directory: string): Promise<void> {
 	try {
 		const realDirectory = DEVMODE
 			? directory
-			: await resolveRealPath(directory);
+			: await resolveRealPathAsync(directory);
 		const targetDir = path.resolve(path.join(process.cwd(), realDirectory));
 
 		if (!fs.existsSync(targetDir)) {
@@ -113,5 +118,47 @@ export async function createDirectory(directory: string): Promise<void> {
 		}
 	} catch (error) {
 		throw new Error(`[error]: error during creating directory: \n${error}`);
+	}
+}
+
+/**
+ * @description Write content to a file
+ * @param destination The path to the file to write
+ * @param content The content to write to the file
+ * @param successMessage The message to display if the file is written successfully
+ */
+export async function writeToFileAsync(
+	destination: string,
+	content: string,
+	successMessage: string,
+): Promise<void> {
+	try {
+		const fileExists = await fileExistsAsync(destination);
+
+		if (fileExists) {
+			const existingContent = await readFileAsync(destination, "utf8");
+			content = existingContent + content;
+		}
+
+		await writeFileAsync(destination, content);
+		console.log(successMessage);
+	} catch (error) {
+		throw new Error(
+			`[error]: an error occurred while writing the file: \n${error}`,
+		);
+	}
+}
+
+/**
+ * @description Read the content from a file
+ * @param filePath The path to the file to read
+ */
+export async function readFromFileAsync(filePath: string): Promise<string> {
+	try {
+		const realPath = DEVMODE ? filePath : await resolveRealPathAsync(filePath);
+		const content = await readFileAsync(realPath, "utf8");
+		return content;
+	} catch (error) {
+		throw new Error(`[error]: error during reading file: \n${error}`);
 	}
 }
