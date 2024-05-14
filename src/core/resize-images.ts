@@ -11,8 +11,8 @@ import { restart } from "@/core/restart";
 import { INPUT_IMAGES_PATH, OUTPUT_RESIZE_IMAGES_PATH } from "@/constants";
 
 /* utils */
-import { createDirectory } from "@/utils/extras";
-import { getAllImageFiles } from "@/utils/images";
+import { createDirectoryAsync } from "@/utils/extras";
+import { getAllImageFilesAsync } from "@/utils/images";
 
 /* types */
 import { T_Resolution } from "@/@types";
@@ -42,7 +42,7 @@ const select_prompt = [
 		type: "checkbox",
 		name: "select",
 		message: "Select images to resize",
-		choices: await getAllImageFiles(),
+		choices: await getAllImageFilesAsync(),
 		validate: (answer: string): string | boolean => {
 			if (answer.length < 1) {
 				return "You must choose at least one image !";
@@ -58,7 +58,7 @@ const manual_prompt = [
 		name: "manual",
 		message: "Enter the file name to resize",
 		validate: async (answer: string): Promise<string | boolean> => {
-			const data = await getAllImageFiles();
+			const data = await getAllImageFilesAsync();
 			if (answer.length < 1) {
 				return "You must enter a file name !";
 			} else if (!data.includes(answer)) {
@@ -133,7 +133,7 @@ export async function resizeImages(): Promise<void> {
 				console.log(chalk.yellow("No images selected to resize !"));
 			} else {
 				console.log("Starting resizing ...");
-				await createDirectory(OUTPUT_RESIZE_IMAGES_PATH);
+				await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
 				await sharpResize(
 					select_answers.select,
 					width_answers.width,
@@ -151,7 +151,7 @@ export async function resizeImages(): Promise<void> {
 				console.log(chalk.yellow("No images selected to resize !"));
 			} else {
 				console.log("Starting resizing ...");
-				await createDirectory(OUTPUT_RESIZE_IMAGES_PATH);
+				await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
 				await sharpResize(
 					[manual_answers.manual],
 					width_answers.width,

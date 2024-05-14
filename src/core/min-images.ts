@@ -2,14 +2,15 @@
 import inquirer from "inquirer";
 import sharp from "sharp";
 import chalk from "chalk";
+import { optimize } from "svgo";
 import * as emoji from "node-emoji";
 
 /* core */
 import { restart } from "@/core/restart";
 
 /* utils */
-import { createDirectory } from "@/utils/extras";
-import { getImageFilesByExtension } from "@/utils/images";
+import { createDirectoryAsync } from "@/utils/extras";
+import { getImageFilesByExtensionAsync } from "@/utils/images";
 
 /* constants */
 import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
@@ -137,14 +138,14 @@ export async function minImages(): Promise<void> {
 
 		if (extension_answers.extension.includes("jpeg")) {
 			JPEG_files = [
-				...(await getImageFilesByExtension("jpg")),
-				...(await getImageFilesByExtension("jpeg")),
+				...(await getImageFilesByExtensionAsync("jpg")),
+				...(await getImageFilesByExtensionAsync("jpeg")),
 			];
 		}
 		if (extension_answers.extension.includes("png"))
-			PNG_files = await getImageFilesByExtension("png");
+			PNG_files = await getImageFilesByExtensionAsync("png");
 		if (extension_answers.extension.includes("webp"))
-			WEBP_files = await getImageFilesByExtension("webp");
+			WEBP_files = await getImageFilesByExtensionAsync("webp");
 
 		if (
 			JPEG_files.length === 0 &&
@@ -154,7 +155,7 @@ export async function minImages(): Promise<void> {
 			console.log(chalk.yellow("No images found to minify !"));
 		} else {
 			console.log("Starting minification ...");
-			await createDirectory(OUTPUT_MIN_IMAGES_PATH);
+			await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
 		}
 
 		if (JPEG_files.length > 0) await sharpCompress(JPEG_files, level, "jpeg");
