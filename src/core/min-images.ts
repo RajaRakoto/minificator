@@ -2,7 +2,6 @@
 import inquirer from "inquirer";
 import sharp from "sharp";
 import chalk from "chalk";
-import { optimize } from "svgo";
 import * as emoji from "node-emoji";
 
 /* core */
@@ -10,7 +9,7 @@ import { restart } from "@/core/restart";
 
 /* utils */
 import { createDirectoryAsync } from "@/utils/extras";
-import { getImageFilesByExtensionAsync } from "@/utils/images";
+import { getAllImageFilesAsync } from "@/utils/images";
 
 /* constants */
 import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
@@ -70,6 +69,12 @@ const quality_prompt = [
 	},
 ];
 
+/**
+ * @description A function to minify images using sharp
+ * @param files List of files to minify
+ * @param qualityValue Level of compression
+ * @param extension Image extension to minify
+ */
 async function sharpCompress(
 	files: string[],
 	qualityValue: number,
@@ -136,17 +141,16 @@ export async function minImages(): Promise<void> {
 		let PNG_files: string[] = [];
 		let WEBP_files: string[] = [];
 
+		// Get all image files by extension
 		if (extension_answers.extension.includes("jpeg")) {
-			JPEG_files = [
-				...(await getImageFilesByExtensionAsync("jpg")),
-				...(await getImageFilesByExtensionAsync("jpeg")),
-			];
+			JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
 		}
 		if (extension_answers.extension.includes("png"))
-			PNG_files = await getImageFilesByExtensionAsync("png");
+			PNG_files = await getAllImageFilesAsync(["png"]);
 		if (extension_answers.extension.includes("webp"))
-			WEBP_files = await getImageFilesByExtensionAsync("webp");
+			WEBP_files = await getAllImageFilesAsync(["webp"]);
 
+		// Check if there are images to minify
 		if (
 			JPEG_files.length === 0 &&
 			PNG_files.length === 0 &&
@@ -158,6 +162,7 @@ export async function minImages(): Promise<void> {
 			await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
 		}
 
+		// Start minification process
 		if (JPEG_files.length > 0) await sharpCompress(JPEG_files, level, "jpeg");
 		if (PNG_files.length > 0) await sharpCompress(PNG_files, level, "png");
 		if (WEBP_files.length > 0) await sharpCompress(WEBP_files, level, "webp");

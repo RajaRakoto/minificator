@@ -1,3 +1,8 @@
+/* types */
+import { T_ImageExtension } from "@/@types";
+
+// ==============================
+
 // dev
 export const DEVMODE = true;
 
@@ -10,3 +15,11 @@ export const OUTPUT_MIN_IMAGES_PATH = DEVMODE
 export const OUTPUT_RESIZE_IMAGES_PATH = DEVMODE
 	? "./tests/minificator/resized-images"
 	: "./minificator/resized-images";
+
+// supported extensions
+export const SUPPORTED_RESIZE_IMAGES_EXTENSIONS: T_ImageExtension[] = [
+	"jpg",
+	"jpeg",
+	"png",
+	"webp",
+];
