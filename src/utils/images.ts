@@ -18,32 +18,24 @@ import { T_ImageExtension, T_SharpExtension } from "@/@types";
 // ==============================
 
 /**
- * @description A function to get image file names with a specific extension from a directory
- * @param extension The desired file extension ("jpg", "jpeg", "png", "webp", "gif", "svg")
+ * @description A function to get all image file names from a directory based on specified extensions
+ * @param extensions An array of file extensions to retrieve
  */
-export async function getImageFilesByExtensionAsync(
-	extension: T_ImageExtension,
+export async function getAllImageFilesAsync(
+	extensions: T_ImageExtension[],
 ): Promise<string[]> {
 	try {
 		const files = await readDirAsync(INPUT_IMAGES_PATH);
-		const imageFiles = files.filter((file) =>
-			new RegExp(`\\.${extension}$`, "i").test(file),
-		);
-		return imageFiles;
-	} catch (error) {
-		throw new Error(`[error]: error during getting image files: \n${error}`);
-	}
-}
-
-/**
- * @description A function to get all image file ("jpg", "jpeg", "png", "webp") names from a directory
- */
-export async function getAllImageFilesAsync(): Promise<string[]> {
-	try {
-		const files = await readDirAsync(INPUT_IMAGES_PATH);
-		const imageFiles = files.filter((file) =>
-			/\.(jpg|jpeg|png|webp)$/i.test(file),
-		);
+		const imageFiles: string[] = [];
+		files.forEach((file) => {
+			const fileExtension = file.split(".").pop()?.toLowerCase();
+			if (
+				fileExtension &&
+				extensions.includes(fileExtension as T_ImageExtension)
+			) {
+				imageFiles.push(file);
+			}
+		});
 		return imageFiles;
 	} catch (error) {
 		throw new Error(
@@ -66,16 +58,16 @@ export function isImage(file: string): boolean {
  * @param qualityValue Level of compression
  * @param extension Image extension available in sharp
  */
-export function sharpTest(
+export async function sharpTestAsync(
 	file: string,
 	qualityValue: number,
 	extension: T_SharpExtension,
-): void {
+): Promise<void> {
 	const input = `${INPUT_IMAGES_PATH}/${file}`;
 	const output = `${OUTPUT_MIN_IMAGES_PATH}/${file}`;
 
 	if (extension === "jpeg" || extension === "jpg") {
-		sharp(input)
+		await sharp(input)
 			.jpeg({ quality: qualityValue })
 			.toFile(output, (error) => {
 				if (error) {
@@ -86,7 +78,7 @@ export function sharpTest(
 			});
 	}
 	if (extension === "png") {
-		sharp(input)
+		await sharp(input)
 			.png({ quality: qualityValue })
 			.toFile(output, (error) => {
 				if (error) {
@@ -97,7 +89,7 @@ export function sharpTest(
 			});
 	}
 	if (extension === "webp") {
-		sharp(input)
+		await sharp(input)
 			.webp({ quality: qualityValue })
 			.toFile(output, (error) => {
 				if (error) {
@@ -114,7 +106,7 @@ export function sharpTest(
  */
 export async function svgGoTestAsync() {
 	try {
-		const svgCompress = optimize(
+		const svgCompress = await optimize(
 			await readFromFileAsync(`${INPUT_IMAGES_PATH}/test.svg`),
 			{
 				multipass: true,
