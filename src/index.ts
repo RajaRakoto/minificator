@@ -1,7 +1,7 @@
 /* libs */
 import inquirer from "inquirer";
-import { Command } from "commander";
 import chalk from "chalk";
+import { Command } from "commander";
 
 /* menu */
 import { menu_prompt } from "@/menu";
@@ -9,6 +9,7 @@ import { menu_prompt } from "@/menu";
 /* core */
 import { minImages } from "@/core/min-images";
 import { resizeImagesAsync } from "@/core/resize-images";
+import { checker } from "@/core/checker";
 
 /* utils */
 import { bannerRenderer } from "@/utils/ascii";
@@ -30,23 +31,30 @@ export async function minificatorCLI(): Promise<void> {
 	// working directory
 	console.log(`${chalk.bold("=> Working directory:")} ${process.cwd()}\n`);
 
-	// start menu
-	const menu_answers = await inquirer.prompt(menu_prompt);
+	// check
+	const checkResult = await checker();
+	if (checkResult.length > 0) {
+		const menu_answers = await inquirer.prompt(menu_prompt(checkResult));
 
-	// switch menu
-	switch (menu_answers.menu) {
-		case "min-images":
-			minImages();
-			break;
-		case "resize-images":
-			resizeImagesAsync();
-			break;
-		case "exit":
-			exitCLI();
-			break;
-		default:
-			minificatorCLI();
-			break;
+		// switch menu
+		switch (menu_answers.menu) {
+			case "min-images":
+				minImages();
+				break;
+			case "resize-images":
+				resizeImagesAsync();
+				break;
+			case "exit":
+				exitCLI();
+				break;
+			default:
+				minificatorCLI();
+				break;
+		}
+	} else {
+		console.log(
+			`${chalk.yellow("No supported files found in the working directory !")}`,
+		);
 	}
 }
 
