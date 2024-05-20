@@ -17,9 +17,21 @@ export const OUTPUT_RESIZE_IMAGES_PATH = DEVMODE
 	: "./minificator/resized-images";
 
 // supported extensions
+export const SUPPORTED_MIN_IMAGES_EXTENSIONS: T_ImageExtension[] = [
+	"jpg",
+	"jpeg",
+	"png",
+	"webp",
+];
 export const SUPPORTED_RESIZE_IMAGES_EXTENSIONS: T_ImageExtension[] = [
 	"jpg",
 	"jpeg",
 	"png",
 	"webp",
+];
+export const SUPPORTED_ALL_IMAGES_EXTENSIONS: T_ImageExtension[] = [
+	...new Set([
+		...SUPPORTED_MIN_IMAGES_EXTENSIONS,
+		...SUPPORTED_RESIZE_IMAGES_EXTENSIONS,
+	]),
 ];
