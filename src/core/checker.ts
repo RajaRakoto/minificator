@@ -11,7 +11,7 @@ import { getAllImageFilesAsync } from "@/utils/images";
 
 // ==============================
 
-export async function checker(): Promise<object[]> {
+export async function checkerAsync(): Promise<object[]> {
 	const result: object[] = [];
 
 	const getMenu = (
