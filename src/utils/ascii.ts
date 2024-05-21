@@ -18,7 +18,7 @@ import { DEVMODE, FONT_PATH } from "@/constants";
  * @param title The title to render
  * @param description The description to render
  */
-export async function bannerRenderer(
+export async function bannerRendererAsync(
 	title: string,
 	description: string,
 ): Promise<string> {

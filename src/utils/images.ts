@@ -45,6 +45,28 @@ export async function getAllImageFilesAsync(
 }
 
 /**
+ * @description A function to get filtered image file names based on specified extensions
+ * @param images An array of image file names to filter
+ * @param extensions An array of file extensions to filter by
+ */
+export async function getFilteredImageFilesAsync(
+	images: string[],
+	extensions: T_ImageExtension[],
+): Promise<string[]> {
+	try {
+		const filteredImagesFile = images.filter((image) => {
+			const fileExtension = image.split(".").pop()?.toLowerCase();
+			return (
+				fileExtension && extensions.includes(fileExtension as T_ImageExtension)
+			);
+		});
+		return filteredImagesFile;
+	} catch (error) {
+		throw new Error(`[error]: error during filtering image files: \n${error}`);
+	}
+}
+
+/**
  * @description A function to test if a file is an image ("jpg", "jpeg", "png", "webp")
  * @param file The file to test
  */
