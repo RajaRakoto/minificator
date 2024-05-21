@@ -5,7 +5,7 @@ import chalk from "chalk";
 
 // ==============================
 
-export function menu_prompt(checkResult: object[]) {
+export function menuPrompt(checkResult: object[]) {
 	checkResult.push(
 		new inquirer.Separator("=========================================="),
 		{

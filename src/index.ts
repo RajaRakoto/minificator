@@ -4,15 +4,15 @@ import chalk from "chalk";
 import { Command } from "commander";
 
 /* menu */
-import { menu_prompt } from "@/menu";
+import { menuPrompt } from "@/menu";
 
 /* core */
-import { minImages } from "@/core/min-images";
+import { minImagesAsync } from "@/core/min-images";
 import { resizeImagesAsync } from "@/core/resize-images";
-import { checker } from "@/core/checker";
+import { checkerAsync } from "@/core/checker";
 
 /* utils */
-import { bannerRenderer } from "@/utils/ascii";
+import { bannerRendererAsync } from "@/utils/ascii";
 import { exitCLI } from "@/utils/extras";
 
 /* files */
@@ -25,21 +25,21 @@ import pkg from "../package.json";
  */
 export async function minificatorCLI(): Promise<void> {
 	// show banner
-	const banner = await bannerRenderer("minificator", `${pkg.description}`);
+	const banner = await bannerRendererAsync("minificator", `${pkg.description}`);
 	console.log(`${banner}\n`);
 
 	// working directory
 	console.log(`${chalk.bold("=> Working directory:")} ${process.cwd()}\n`);
 
 	// check
-	const checkResult = await checker();
+	const checkResult = await checkerAsync();
 	if (checkResult.length > 0) {
-		const menu_answers = await inquirer.prompt(menu_prompt(checkResult));
+		const menu_answers = await inquirer.prompt(menuPrompt(checkResult));
 
 		// switch menu
 		switch (menu_answers.menu) {
 			case "min-images":
-				minImages();
+				minImagesAsync();
 				break;
 			case "resize-images":
 				resizeImagesAsync();
