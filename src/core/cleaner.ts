@@ -5,11 +5,11 @@ import chalk from "chalk";
 /* core */
 import { restartAsync } from "@/core/restart";
 
-/* utils */
-import { fileExistsAsync, rmdirAsync } from "@/utils/extras";
-
 /* constants */
 import { OUTPUT_ROOT_PATH } from "@/constants";
+
+/* utils */
+import { fileExistsAsync, rmdirAsync } from "@/utils/extras";
 
 // ==============================
 

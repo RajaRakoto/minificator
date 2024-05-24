@@ -7,6 +7,13 @@ import * as emoji from "node-emoji";
 /* core */
 import { restartAsync } from "@/core/restart";
 
+/* constants */
+import {
+	INPUT_IMAGES_PATH,
+	OUTPUT_MIN_IMAGES_PATH,
+	SUPPORTED_MIN_IMAGES_EXTENSIONS,
+} from "@/constants";
+
 /* utils */
 import { createDirectoryAsync } from "@/utils/extras";
 import {
@@ -14,13 +21,6 @@ import {
 	getFilteredImageFilesAsync,
 	isExistedImageFilesByExtensionAsync,
 } from "@/utils/images";
-
-/* constants */
-import {
-	INPUT_IMAGES_PATH,
-	OUTPUT_MIN_IMAGES_PATH,
-	SUPPORTED_MIN_IMAGES_EXTENSIONS,
-} from "@/constants";
 
 /* types */
 import { T_SharpExtension } from "@/@types";

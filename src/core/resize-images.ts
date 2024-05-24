@@ -7,16 +7,16 @@ import * as emoji from "node-emoji";
 /* core */
 import { restartAsync } from "@/core/restart";
 
-/* utils */
-import { createDirectoryAsync } from "@/utils/extras";
-import { getAllImageFilesAsync } from "@/utils/images";
-
 /* constants */
 import {
 	INPUT_IMAGES_PATH,
 	OUTPUT_RESIZE_IMAGES_PATH,
 	SUPPORTED_RESIZE_IMAGES_EXTENSIONS,
 } from "@/constants";
+
+/* utils */
+import { createDirectoryAsync } from "@/utils/extras";
+import { getAllImageFilesAsync } from "@/utils/images";
 
 /* types */
 import { I_Resolution, T_Resolution } from "@/@types";

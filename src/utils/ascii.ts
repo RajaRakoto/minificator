@@ -5,11 +5,11 @@ import chalk from "chalk";
 /* files */
 import pkg from "../../package.json";
 
-/* utils */
-import { resolveRealPathAsync, readFileAsync } from "@/utils/extras";
-
 /* constants */
 import { DEVMODE, FONT_PATH } from "@/constants";
+
+/* utils */
+import { resolveRealPathAsync, readFileAsync } from "@/utils/extras";
 
 // ==============================
 
