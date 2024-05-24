@@ -67,6 +67,32 @@ export async function getFilteredImageFilesAsync(
 }
 
 /**
+ * @description A function to check the existence of image files with specified extensions
+ * @param images An array of image file names to check
+ * @param extensions An array of file extensions to check against
+ */
+export async function isExistedImageFilesByExtensionAsync(
+	images: string[],
+	extensions: T_ImageExtension[],
+): Promise<boolean> {
+	try {
+		const extensionsLowerCase = extensions.map((ext) => ext.toLowerCase());
+		const exists = images.some((image) => {
+			const fileExtension = image.split(".").pop()?.toLowerCase();
+			return (
+				fileExtension &&
+				extensionsLowerCase.includes(fileExtension as T_ImageExtension)
+			);
+		});
+		return exists;
+	} catch (error) {
+		throw new Error(
+			`[error]: error during checking existence of image files: \n${error}`,
+		);
+	}
+}
+
+/**
  * @description A function to test if a file is an image ("jpg", "jpeg", "png", "webp")
  * @param file The file to test
  */
