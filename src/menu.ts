@@ -9,6 +9,10 @@ export function menuPrompt(checkResult: object[]) {
 	checkResult.push(
 		new inquirer.Separator("=========================================="),
 		{
+			name: chalk.yellow(`${emoji.get("sparkles")} clean output folder`),
+			value: "cleaner",
+		},
+		{
 			name: chalk.red(`${emoji.get("door")} exit`),
 			value: "exit",
 		},

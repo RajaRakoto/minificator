@@ -10,6 +10,7 @@ import { menuPrompt } from "@/menu";
 import { minImagesAsync } from "@/core/min-images";
 import { resizeImagesAsync } from "@/core/resize-images";
 import { checkerAsync } from "@/core/checker";
+import { cleanerAsync } from "./core/cleaner";
 
 /* utils */
 import { bannerRendererAsync } from "@/utils/ascii";
@@ -43,6 +44,9 @@ export async function minificatorCLI(): Promise<void> {
 				break;
 			case "resize-images":
 				resizeImagesAsync();
+				break;
+			case "cleaner":
+				cleanerAsync();
 				break;
 			case "exit":
 				exitCLI();
