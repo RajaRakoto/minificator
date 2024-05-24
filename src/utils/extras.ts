@@ -17,6 +17,7 @@ export const readFileAsync = util.promisify(fs.readFile);
 export const readDirAsync = util.promisify(fs.readdir);
 export const realPathAsync = util.promisify(fs.realpath);
 export const mkdirAsync = util.promisify(fs.mkdir);
+export const rmdirAsync = util.promisify(fs.rmdir);
 
 /**
  * @description A function that exits the CLI
