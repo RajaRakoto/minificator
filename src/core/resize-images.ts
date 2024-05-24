@@ -7,6 +7,10 @@ import * as emoji from "node-emoji";
 /* core */
 import { restart } from "@/core/restart";
 
+/* utils */
+import { createDirectoryAsync } from "@/utils/extras";
+import { getAllImageFilesAsync } from "@/utils/images";
+
 /* constants */
 import {
 	INPUT_IMAGES_PATH,
@@ -14,16 +18,12 @@ import {
 	SUPPORTED_RESIZE_IMAGES_EXTENSIONS,
 } from "@/constants";
 
-/* utils */
-import { createDirectoryAsync } from "@/utils/extras";
-import { getAllImageFilesAsync } from "@/utils/images";
-
 /* types */
-import { T_Resolution } from "@/@types";
+import { I_Resolution, T_Resolution } from "@/@types";
 
 // ==============================
 
-const resize_prompt = [
+const resize_images_prompt = [
 	{
 		type: "list",
 		name: "resize",
@@ -45,7 +45,7 @@ const resize_prompt = [
 	},
 ];
 
-const select_prompt = [
+const select_resize_images_prompt = [
 	{
 		type: "checkbox",
 		name: "select",
@@ -60,7 +60,7 @@ const select_prompt = [
 	},
 ];
 
-const extension_prompt = [
+const extension_resize_images_prompt = [
 	{
 		type: "checkbox",
 		name: "extension",
@@ -88,7 +88,7 @@ const extension_prompt = [
 	},
 ];
 
-const manual_prompt = [
+const manual_resize_images_prompt = [
 	{
 		type: "input",
 		name: "manual",
@@ -107,7 +107,11 @@ const manual_prompt = [
 	},
 ];
 
-const resolutionPrompt = (type: T_Resolution): object => {
+/**
+ * @description A function to prompt for resolution values (width and height)
+ * @param type Type of resolution (width or height)
+ */
+function resolutionPrompt(type: T_Resolution): object {
 	const resolution_prompt = [
 		{
 			type: "number",
@@ -128,7 +132,32 @@ const resolutionPrompt = (type: T_Resolution): object => {
 		},
 	];
 	return resolution_prompt;
-};
+}
+
+/**
+ * @description A function to enter resolution values (width and height)
+ */
+async function enterResolutionValuesAsync(): Promise<I_Resolution> {
+	const width_answers = await inquirer.prompt(resolutionPrompt("width"));
+	const height_answers = await inquirer.prompt(resolutionPrompt("height"));
+	return { width: width_answers.width, height: height_answers.height };
+}
+
+/**
+ * @description Start resizing process
+ * @param files List of files to resize
+ * @param width Width of the image
+ * @param height Height of the image
+ */
+async function startResizeProcessAsync(
+	files: string[],
+	width: number,
+	height: number,
+): Promise<void> {
+	console.log("Starting resizing ...");
+	await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
+	await sharpResizeAsync(files, width, height);
+}
 
 /**
  * @description Resize images using sharp
@@ -170,95 +199,72 @@ async function sharpResizeAsync(
 	await Promise.all(promises);
 }
 
+/**
+ * @description A main function to resize images
+ */
 export async function resizeImagesAsync(): Promise<void> {
 	try {
-		const resize_answers = await inquirer.prompt(resize_prompt);
+		const resize_images_answers = await inquirer.prompt(resize_images_prompt);
 
-		if (resize_answers.resize === "select") {
-			const select_answers = await inquirer.prompt(select_prompt);
-			const width_answers = await inquirer.prompt(resolutionPrompt("width"));
-			const height_answers = await inquirer.prompt(resolutionPrompt("height"));
+		let JPEG_files: string[] = [];
+		let PNG_files: string[] = [];
+		let WEBP_files: string[] = [];
 
-			if (select_answers.select.length === 0) {
-				console.log(chalk.yellow("No images selected to resize !"));
-			} else {
-				console.log("Starting resizing ...");
-				await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
-				await sharpResizeAsync(
-					select_answers.select,
-					width_answers.width,
-					height_answers.height,
-				);
-			}
-		}
-
-		if (resize_answers.resize === "extension") {
-			const extension_answers = await inquirer.prompt(extension_prompt);
-			const width_answers = await inquirer.prompt(resolutionPrompt("width"));
-			const height_answers = await inquirer.prompt(resolutionPrompt("height"));
-
-			let JPEG_files: string[] = [];
-			let PNG_files: string[] = [];
-			let WEBP_files: string[] = [];
-
-			// Get all image files by extension
-			if (extension_answers.extension.includes("jpeg")) {
-				JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
-			}
-			if (extension_answers.extension.includes("png"))
-				PNG_files = await getAllImageFilesAsync(["png"]);
-			if (extension_answers.extension.includes("webp"))
-				WEBP_files = await getAllImageFilesAsync(["webp"]);
-
-			// Check if there are images to resize
-			if (
-				JPEG_files.length === 0 &&
-				PNG_files.length === 0 &&
-				WEBP_files.length === 0
-			) {
-				console.log(chalk.yellow("No images found to resize !"));
-			} else {
-				console.log("Starting resizing ...");
-				await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
-			}
+		// === Select option ===
+		if (resize_images_answers.resize === "select") {
+			const select_resize_images_answers = await inquirer.prompt(
+				select_resize_images_prompt,
+			);
+			const { width, height } = await enterResolutionValuesAsync();
 
 			// Start resizing process
-			if (JPEG_files.length > 0)
-				await sharpResizeAsync(
-					JPEG_files,
-					width_answers.width,
-					height_answers.height,
-				);
-			if (PNG_files.length > 0)
-				await sharpResizeAsync(
-					PNG_files,
-					width_answers.width,
-					height_answers.height,
-				);
-			if (WEBP_files.length > 0)
-				await sharpResizeAsync(
-					WEBP_files,
-					width_answers.width,
-					height_answers.height,
-				);
+			await startResizeProcessAsync(
+				select_resize_images_answers.select,
+				width,
+				height,
+			);
 		}
 
-		if (resize_answers.resize === "manual") {
-			const manual_answers = await inquirer.prompt(manual_prompt);
-			const width_answers = await inquirer.prompt(resolutionPrompt("width"));
-			const height_answers = await inquirer.prompt(resolutionPrompt("height"));
+		// === Extension option ===
+		if (resize_images_answers.resize === "extension") {
+			const extension_resize_images_answers = await inquirer.prompt(
+				extension_resize_images_prompt,
+			);
+			const { width, height } = await enterResolutionValuesAsync();
 
-			if (manual_answers.manual.length === 0) {
-				console.log(chalk.yellow("No images selected to resize !"));
-			} else {
-				console.log("Starting resizing ...");
-				await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
-				await sharpResizeAsync(
-					[manual_answers.manual],
-					width_answers.width,
-					height_answers.height,
-				);
+			// Get all image files by extension
+			if (extension_resize_images_answers.extension.includes("jpeg")) {
+				JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
 			}
+			if (extension_resize_images_answers.extension.includes("png"))
+				PNG_files = await getAllImageFilesAsync(["png"]);
+			if (extension_resize_images_answers.extension.includes("webp"))
+				WEBP_files = await getAllImageFilesAsync(["webp"]);
+
+			// Start resizing process
+			console.log("Starting resizing ...");
+			await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
+			if (JPEG_files.length > 0)
+				await sharpResizeAsync(JPEG_files, width, height);
+			if (PNG_files.length > 0)
+				await sharpResizeAsync(PNG_files, width, height);
+			if (WEBP_files.length > 0)
+				await sharpResizeAsync(WEBP_files, width, height);
+		}
+
+		// === Manual option ===
+		if (resize_images_answers.resize === "manual") {
+			const manual_resize_images_answers = await inquirer.prompt(
+				manual_resize_images_prompt,
+			);
+			const { width, height } = await enterResolutionValuesAsync();
+
+			// Start resizing process
+			await startResizeProcessAsync(
+				[manual_resize_images_answers.manual],
+				width,
+				height,
+			);
 		}
 
 		restart();

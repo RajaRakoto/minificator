@@ -205,7 +205,7 @@ async function startMinProcessAsync(
 	PNG_files: string[],
 	WEBP_files: string[],
 	level: number,
-) {
+): Promise<void> {
 	console.log("Starting minification ...");
 	await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
 	if (JPEG_files.length > 0)
@@ -225,7 +225,7 @@ async function startMinProcessManualAsync(
 	manual_file: string,
 	extension: T_SharpExtension,
 	level: number,
-) {
+): Promise<void> {
 	console.log("Starting minification ...");
 	await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
 	if (extension === "jpeg" || extension === "jpg")
