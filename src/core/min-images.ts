@@ -5,7 +5,7 @@ import chalk from "chalk";
 import * as emoji from "node-emoji";
 
 /* core */
-import { restart } from "@/core/restart";
+import { restartAsync } from "@/core/restart";
 
 /* utils */
 import { createDirectoryAsync } from "@/utils/extras";
@@ -327,7 +327,7 @@ export async function minImagesAsync(): Promise<void> {
 			await startMinProcessManualAsync(manual_file, extension, level);
 		}
 
-		restart();
+		restartAsync();
 	} catch (error) {
 		throw new Error(
 			`[error]: an error occurred during minification process: \n${error}`,

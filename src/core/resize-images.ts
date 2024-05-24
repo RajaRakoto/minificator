@@ -5,7 +5,7 @@ import chalk from "chalk";
 import * as emoji from "node-emoji";
 
 /* core */
-import { restart } from "@/core/restart";
+import { restartAsync } from "@/core/restart";
 
 /* utils */
 import { createDirectoryAsync } from "@/utils/extras";
@@ -267,7 +267,7 @@ export async function resizeImagesAsync(): Promise<void> {
 			);
 		}
 
-		restart();
+		restartAsync();
 	} catch (error) {
 		throw new Error(
 			`[error]: an error occurred during resizing process: \n${error}`,
