@@ -9,6 +9,9 @@ export const DEVMODE = true;
 // path
 export const FONT_PATH = "./fonts/Standard.flf";
 export const INPUT_IMAGES_PATH = DEVMODE ? "./tests" : "./";
+export const OUTPUT_ROOT_PATH = DEVMODE
+	? "./tests/minificator"
+	: "./minificator";
 export const OUTPUT_MIN_IMAGES_PATH = DEVMODE
 	? "./tests/minificator/minified-images"
 	: "./minificator/minified-images";
