@@ -9,17 +9,62 @@ import { restart } from "@/core/restart";
 
 /* utils */
 import { createDirectoryAsync } from "@/utils/extras";
-import { getAllImageFilesAsync } from "@/utils/images";
+import {
+	getAllImageFilesAsync,
+	getFilteredImageFilesAsync,
+	isExistedImageFilesByExtensionAsync,
+} from "@/utils/images";
 
 /* constants */
-import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
+import {
+	INPUT_IMAGES_PATH,
+	OUTPUT_MIN_IMAGES_PATH,
+	SUPPORTED_MIN_IMAGES_EXTENSIONS,
+} from "@/constants";
 
 /* types */
 import { T_SharpExtension } from "@/@types";
 
 // ==============================
 
-const extension_prompt = [
+const min_images_prompt = [
+	{
+		type: "list",
+		name: "minify",
+		message: "How do you want to minify images",
+		choices: [
+			{
+				name: "Minify image from a list",
+				value: "select",
+			},
+			{
+				name: "Minify image by extension",
+				value: "extension",
+			},
+			{
+				name: "Minify image by name",
+				value: "manual",
+			},
+		],
+	},
+];
+
+const select_min_images_prompt = [
+	{
+		type: "checkbox",
+		name: "select",
+		message: "Select images to minify from the list",
+		choices: await getAllImageFilesAsync(SUPPORTED_MIN_IMAGES_EXTENSIONS),
+		validate: (answer: string): string | boolean => {
+			if (answer.length < 1) {
+				return "You must choose at least one image !";
+			}
+			return true;
+		},
+	},
+];
+
+const extension_min_images_prompt = [
 	{
 		type: "checkbox",
 		name: "extension",
@@ -41,6 +86,23 @@ const extension_prompt = [
 		validate: (answer: string): string | boolean => {
 			if (answer.length < 1) {
 				return "You must choose at least one extension !";
+			}
+			return true;
+		},
+	},
+];
+
+const manual_min_images_prompt = [
+	{
+		type: "input",
+		name: "manual",
+		message: "Enter the file name to minify",
+		validate: async (answer: string): Promise<string | boolean> => {
+			const data = await getAllImageFilesAsync(SUPPORTED_MIN_IMAGES_EXTENSIONS);
+			if (answer.length < 1) {
+				return "You must enter a file name !";
+			} else if (!data.includes(answer)) {
+				return "The file name does not exist, is not an image or is not supported !";
 			}
 			return true;
 		},
@@ -75,7 +137,7 @@ const quality_prompt = [
  * @param qualityValue Level of compression
  * @param extension Image extension to minify
  */
-async function sharpCompress(
+async function sharpCompressAsync(
 	files: string[],
 	qualityValue: number,
 	extension: T_SharpExtension,
@@ -131,9 +193,55 @@ async function sharpCompress(
 	await Promise.all(promises);
 }
 
-export async function minImages(): Promise<void> {
+/**
+ * @description Start minification process
+ * @param JPEG_files Array of JPEG files
+ * @param PNG_files Array of PNG files
+ * @param WEBP_files Array of WEBP files
+ * @param level Level of compression
+ */
+async function startMinProcessAsync(
+	JPEG_files: string[],
+	PNG_files: string[],
+	WEBP_files: string[],
+	level: number,
+) {
+	console.log("Starting minification ...");
+	await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
+	if (JPEG_files.length > 0)
+		await sharpCompressAsync(JPEG_files, level, "jpeg");
+	if (PNG_files.length > 0) await sharpCompressAsync(PNG_files, level, "png");
+	if (WEBP_files.length > 0)
+		await sharpCompressAsync(WEBP_files, level, "webp");
+}
+
+/**
+ * @description Start minification process for manual input
+ * @param manual_file A manual file name to minify
+ * @param extension Image extension
+ * @param level Level of compression
+ */
+async function startMinProcessManualAsync(
+	manual_file: string,
+	extension: T_SharpExtension,
+	level: number,
+) {
+	console.log("Starting minification ...");
+	await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
+	if (extension === "jpeg" || extension === "jpg")
+		await sharpCompressAsync([manual_file], level, "jpeg");
+	if (extension === "png")
+		await sharpCompressAsync([manual_file], level, "png");
+	if (extension === "webp")
+		await sharpCompressAsync([manual_file], level, "webp");
+}
+
+/**
+ * @description A main function to minify images
+ */
+export async function minImagesAsync(): Promise<void> {
 	try {
-		const extension_answers = await inquirer.prompt(extension_prompt);
+		const min_images_answers = await inquirer.prompt(min_images_prompt);
 		const quality_answers = await inquirer.prompt(quality_prompt);
 		const level = quality_answers.quality;
 
@@ -141,31 +249,83 @@ export async function minImages(): Promise<void> {
 		let PNG_files: string[] = [];
 		let WEBP_files: string[] = [];
 
-		// Get all image files by extension
-		if (extension_answers.extension.includes("jpeg")) {
-			JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
-		}
-		if (extension_answers.extension.includes("png"))
-			PNG_files = await getAllImageFilesAsync(["png"]);
-		if (extension_answers.extension.includes("webp"))
-			WEBP_files = await getAllImageFilesAsync(["webp"]);
+		// === Select option ===
+		if (min_images_answers.minify === "select") {
+			const select_min_images_answers = await inquirer.prompt(
+				select_min_images_prompt,
+			);
 
-		// Check if there are images to minify
-		if (
-			JPEG_files.length === 0 &&
-			PNG_files.length === 0 &&
-			WEBP_files.length === 0
-		) {
-			console.log(chalk.yellow("No images found to minify !"));
-		} else {
-			console.log("Starting minification ...");
-			await createDirectoryAsync(OUTPUT_MIN_IMAGES_PATH);
+			// Get filtered image files by extension
+			if (
+				await isExistedImageFilesByExtensionAsync(
+					select_min_images_answers.select,
+					["jpg", "jpeg"],
+				)
+			) {
+				JPEG_files = await getFilteredImageFilesAsync(
+					select_min_images_answers.select,
+					["jpg", "jpeg"],
+				);
+				console.log("jpeg files:" + JPEG_files);
+			}
+			if (
+				await isExistedImageFilesByExtensionAsync(
+					select_min_images_answers.select,
+					["png"],
+				)
+			) {
+				PNG_files = await getFilteredImageFilesAsync(
+					select_min_images_answers.select,
+					["png"],
+				);
+			}
+			if (
+				await isExistedImageFilesByExtensionAsync(
+					select_min_images_answers.select,
+					["webp"],
+				)
+			) {
+				WEBP_files = await getFilteredImageFilesAsync(
+					select_min_images_answers.select,
+					["webp"],
+				);
+			}
+
+			// Start minification process
+			await startMinProcessAsync(JPEG_files, PNG_files, WEBP_files, level);
 		}
 
-		// Start minification process
-		if (JPEG_files.length > 0) await sharpCompress(JPEG_files, level, "jpeg");
-		if (PNG_files.length > 0) await sharpCompress(PNG_files, level, "png");
-		if (WEBP_files.length > 0) await sharpCompress(WEBP_files, level, "webp");
+		//  === Extension option ===
+		if (min_images_answers.minify === "extension") {
+			const extension_min_images_answers = await inquirer.prompt(
+				extension_min_images_prompt,
+			);
+
+			// Get all image files by extension
+			if (extension_min_images_answers.extension.includes("jpeg")) {
+				JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
+			}
+			if (extension_min_images_answers.extension.includes("png"))
+				PNG_files = await getAllImageFilesAsync(["png"]);
+			if (extension_min_images_answers.extension.includes("webp"))
+				WEBP_files = await getAllImageFilesAsync(["webp"]);
+
+			// Start minification process
+			await startMinProcessAsync(JPEG_files, PNG_files, WEBP_files, level);
+		}
+
+		// === Manual option ===
+		if (min_images_answers.minify === "manual") {
+			const manual_min_images_answers = await inquirer.prompt(
+				manual_min_images_prompt,
+			);
+
+			const manual_file = manual_min_images_answers.manual;
+			const extension = manual_file.split(".").pop() as T_SharpExtension;
+
+			// Start minification process
+			await startMinProcessManualAsync(manual_file, extension, level);
+		}
 
 		restart();
 	} catch (error) {
