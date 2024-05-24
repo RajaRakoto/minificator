@@ -12,7 +12,7 @@ import { getAllImageFilesAsync } from "@/utils/images";
 // ==============================
 
 export async function checkerAsync(): Promise<object[]> {
-	const result: object[] = [];
+	const menu: object[] = [];
 
 	const getMenu = (
 		name: string,
@@ -21,7 +21,7 @@ export async function checkerAsync(): Promise<object[]> {
 		available: boolean,
 	) => {
 		return {
-			name: `${emoji.get(available ? "wrench" : "weary")} ${available ? name : chalk.gray(name + "(" + missingMessage + ")")}`,
+			name: `${emoji.get(available ? "wrench" : "weary")} ${available ? name : chalk.gray(name + " - " + missingMessage)}`,
 			value: value,
 		};
 	};
@@ -30,14 +30,25 @@ export async function checkerAsync(): Promise<object[]> {
 		SUPPORTED_ALL_IMAGES_EXTENSIONS,
 	);
 
-	if (imagesData.length > 0) {
-		result.push(
-			new inquirer.Separator("================= images ================="),
-			getMenu("Minify JPEG|PNG|WEBP", "min-images", "", true),
-			getMenu("Resize JPEG|PNG|WEBP", "resize-images", "", true),
-			getMenu("Test", "", "no test file founded", false),
-		);
-	}
+	const imagesAvailable = imagesData.length > 0;
 
-	return result;
+	menu.push(
+		new inquirer.Separator("================= images ================="),
+		getMenu(
+			"Minify JPEG|PNG|WEBP",
+			`${imagesAvailable ? "min-images" : ""}`,
+			`${imagesAvailable ? "" : "no image file founded"}`,
+			imagesAvailable ? true : false,
+		),
+		getMenu(
+			"Resize JPEG|PNG|WEBP",
+			`${imagesAvailable ? "resize-images" : ""}`,
+			`${imagesAvailable ? "" : "no image file founded"}`,
+			imagesAvailable ? true : false,
+		),
+		new inquirer.Separator("================== test =================="),
+		getMenu("Test", "", "no test file founded", false),
+	);
+
+	return menu;
 }
