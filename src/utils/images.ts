@@ -1,16 +1,11 @@
 /* libs */
 import sharp from "sharp";
-import { optimize } from "svgo";
 
 /* constants */
 import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 
 /* utils */
-import {
-	readDirAsync,
-	readFromFileAsync,
-	writeToFileAsync,
-} from "@/utils/extras";
+import { readDirAsync } from "@/utils/extras";
 
 /* types */
 import { T_ImageExtension, T_SharpExtension } from "@/@types";
@@ -146,27 +141,5 @@ export async function sharpTestAsync(
 					console.log("WEBP -> sharp test successful !");
 				}
 			});
-	}
-}
-
-/**
- * @description A function to test svgo image minification
- */
-export async function svgGoTestAsync() {
-	try {
-		const svgCompress = await optimize(
-			await readFromFileAsync(`${INPUT_IMAGES_PATH}/test.svg`),
-			{
-				multipass: true,
-			},
-		);
-
-		await writeToFileAsync(
-			`${OUTPUT_MIN_IMAGES_PATH}/test.svg`,
-			svgCompress.data,
-			"SVG -> svgo test successful !",
-		);
-	} catch (error) {
-		throw new Error(`[error]: error during SVGgo compression: \n${error}`);
 	}
 }

@@ -1,13 +1,9 @@
-/* utils */
-import {
-	sharpTestAsync,
-	svgGoTestAsync,
-	getAllImageFilesAsync,
-} from "@/utils/images";
-import { createDirectoryAsync } from "@/utils/extras";
-
 /* constants */
 import { OUTPUT_RESIZE_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
+
+/* utils */
+import { sharpTestAsync, getAllImageFilesAsync } from "@/utils/images";
+import { createDirectoryAsync } from "@/utils/extras";
 
 // ==============================
 
@@ -23,9 +19,6 @@ async function test() {
 		await sharpTestAsync("test.jpg", qualityValue, "jpeg");
 		await sharpTestAsync("test.png", qualityValue, "png");
 		await sharpTestAsync("test.webp", qualityValue, "webp");
-
-		// test SVGgo compression
-		await svgGoTestAsync();
 
 		// test getting all image files by extension
 		await getAllImageFilesAsync([
