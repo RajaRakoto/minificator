@@ -1,8 +1,6 @@
 /* libs */
 import inquirer from "inquirer";
 import sharp from "sharp";
-import chalk from "chalk";
-import * as emoji from "node-emoji";
 
 /* core */
 import { restartAsync } from "@/core/restart";
@@ -15,7 +13,11 @@ import {
 } from "@/constants";
 
 /* utils */
-import { createDirectoryAsync } from "@/utils/extras";
+import {
+	createDirectoryAsync,
+	successMessage,
+	errorMessage,
+} from "@/utils/extras";
 import {
 	getAllImageFilesAsync,
 	getFilteredImageFilesAsync,
@@ -142,15 +144,6 @@ async function sharpCompressAsync(
 	qualityValue: number,
 	extension: T_SharpExtension,
 ): Promise<void> {
-	const successMessage = (file: string) => {
-		console.log(
-			chalk.green(`${emoji.get("framed_picture")} ${file} minified ... [done]`),
-		);
-	};
-	const errorMessage = (error: Error) => {
-		throw new Error(`[error]: minification failed: \n${error}`);
-	};
-
 	const promises = files.map((file) => {
 		const input = `${INPUT_IMAGES_PATH}/${file}`;
 		const output = `${OUTPUT_MIN_IMAGES_PATH}/${file}`;
@@ -181,9 +174,9 @@ async function sharpCompressAsync(
 
 			transform.toFile(output, (error) => {
 				if (error) {
-					reject(errorMessage(error));
+					reject(errorMessage(error, "minify"));
 				} else {
-					successMessage(file);
+					successMessage(file, "framed_picture", "minified");
 					resolve();
 				}
 			});

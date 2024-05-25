@@ -1,8 +1,6 @@
 /* libs */
 import inquirer from "inquirer";
 import sharp from "sharp";
-import chalk from "chalk";
-import * as emoji from "node-emoji";
 
 /* core */
 import { restartAsync } from "@/core/restart";
@@ -15,7 +13,11 @@ import {
 } from "@/constants";
 
 /* utils */
-import { createDirectoryAsync } from "@/utils/extras";
+import {
+	createDirectoryAsync,
+	successMessage,
+	errorMessage,
+} from "@/utils/extras";
 import { getAllImageFilesAsync } from "@/utils/images";
 
 /* types */
@@ -170,15 +172,6 @@ async function sharpResizeAsync(
 	width: number,
 	height: number,
 ): Promise<void> {
-	const successMessage = (file: string) => {
-		console.log(
-			chalk.green(`${emoji.get("framed_picture")} ${file} resized ... [done]`),
-		);
-	};
-	const errorMessage = (error: Error) => {
-		throw new Error(`[error]: resize failed: \n${error}`);
-	};
-
 	const promises = files.map((file) => {
 		const input = `${INPUT_IMAGES_PATH}/${file}`;
 		const output = `${OUTPUT_RESIZE_IMAGES_PATH}/${file}`;
@@ -187,9 +180,9 @@ async function sharpResizeAsync(
 			const transform = sharp(input).resize(width, height);
 			transform.toFile(`${output}`, (error) => {
 				if (error) {
-					reject(errorMessage(error));
+					reject(errorMessage(error, "resize"));
 				} else {
-					successMessage(file);
+					successMessage(file, "framed_picture", "resized");
 					resolve();
 				}
 			});
