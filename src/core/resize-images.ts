@@ -7,7 +7,7 @@ import { restartAsync } from "@/core/restart";
 
 /* constants */
 import {
-	INPUT_IMAGES_PATH,
+	INPUT_FILES_PATH,
 	OUTPUT_RESIZE_IMAGES_PATH,
 	SUPPORTED_RESIZE_IMAGES_EXTENSIONS,
 } from "@/constants";
@@ -173,7 +173,7 @@ async function sharpResizeAsync(
 	height: number,
 ): Promise<void> {
 	const promises = files.map((file) => {
-		const input = `${INPUT_IMAGES_PATH}/${file}`;
+		const input = `${INPUT_FILES_PATH}/${file}`;
 		const output = `${OUTPUT_RESIZE_IMAGES_PATH}/${file}`;
 
 		return new Promise<void>((resolve, reject) => {

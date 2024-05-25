@@ -2,7 +2,7 @@
 import sharp from "sharp";
 
 /* constants */
-import { INPUT_IMAGES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
+import { INPUT_FILES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 
 /* utils */
 import { readDirAsync } from "@/utils/extras";
@@ -20,7 +20,7 @@ export async function getAllImageFilesAsync(
 	extensions: T_ImageExtension[],
 ): Promise<string[]> {
 	try {
-		const files = await readDirAsync(INPUT_IMAGES_PATH);
+		const files = await readDirAsync(INPUT_FILES_PATH);
 		const imageFiles: string[] = [];
 		files.forEach((file) => {
 			const fileExtension = file.split(".").pop()?.toLowerCase();
@@ -106,7 +106,7 @@ export async function sharpTestAsync(
 	qualityValue: number,
 	extension: T_SharpExtension,
 ): Promise<void> {
-	const input = `${INPUT_IMAGES_PATH}/${file}`;
+	const input = `${INPUT_FILES_PATH}/${file}`;
 	const output = `${OUTPUT_MIN_IMAGES_PATH}/${file}`;
 
 	if (extension === "jpeg" || extension === "jpg") {
