@@ -186,6 +186,6 @@ export function successMessage(
  * @param error Error message to display
  * @param context Context message to display (minify, resize ...)
  */
-export function errorMessage(error: Error, context: string): void {
+export function errorMessage(error: Error | unknown, context: string): void {
 	throw new Error(`[error]: ${context} failed: \n${error}`);
 }
