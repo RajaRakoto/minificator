@@ -203,14 +203,14 @@ export async function resizeImagesAsync(): Promise<void> {
 		let PNG_files: string[] = [];
 		let WEBP_files: string[] = [];
 
-		// === Select option ===
+		// === select option ===
 		if (resize_images_answers.resize === "select") {
 			const select_resize_images_answers = await inquirer.prompt(
 				select_resize_images_prompt,
 			);
 			const { width, height } = await enterResolutionValuesAsync();
 
-			// Start resizing process
+			// start resizing process
 			await startResizeProcessAsync(
 				select_resize_images_answers.select,
 				width,
@@ -218,14 +218,14 @@ export async function resizeImagesAsync(): Promise<void> {
 			);
 		}
 
-		// === Extension option ===
+		// === extension option ===
 		if (resize_images_answers.resize === "extension") {
 			const extension_resize_images_answers = await inquirer.prompt(
 				extension_resize_images_prompt,
 			);
 			const { width, height } = await enterResolutionValuesAsync();
 
-			// Get all image files by extension
+			// get all image files by extension
 			if (extension_resize_images_answers.extension.includes("jpeg")) {
 				JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
 			}
@@ -234,7 +234,7 @@ export async function resizeImagesAsync(): Promise<void> {
 			if (extension_resize_images_answers.extension.includes("webp"))
 				WEBP_files = await getAllImageFilesAsync(["webp"]);
 
-			// Start resizing process
+			// start resizing process
 			console.log("Starting resizing ...");
 			await createDirectoryAsync(OUTPUT_RESIZE_IMAGES_PATH);
 			if (JPEG_files.length > 0)
@@ -245,14 +245,14 @@ export async function resizeImagesAsync(): Promise<void> {
 				await sharpResizeAsync(WEBP_files, width, height);
 		}
 
-		// === Manual option ===
+		// === manual option ===
 		if (resize_images_answers.resize === "manual") {
 			const manual_resize_images_answers = await inquirer.prompt(
 				manual_resize_images_prompt,
 			);
 			const { width, height } = await enterResolutionValuesAsync();
 
-			// Start resizing process
+			// start resizing process
 			await startResizeProcessAsync(
 				[manual_resize_images_answers.manual],
 				width,

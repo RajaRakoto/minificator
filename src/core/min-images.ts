@@ -242,13 +242,13 @@ export async function minImagesAsync(): Promise<void> {
 		let PNG_files: string[] = [];
 		let WEBP_files: string[] = [];
 
-		// === Select option ===
+		// === select option ===
 		if (min_images_answers.minify === "select") {
 			const select_min_images_answers = await inquirer.prompt(
 				select_min_images_prompt,
 			);
 
-			// Get filtered image files by extension
+			// get filtered image files by extension
 			if (
 				await isExistedImageFilesByExtensionAsync(
 					select_min_images_answers.select,
@@ -284,17 +284,17 @@ export async function minImagesAsync(): Promise<void> {
 				);
 			}
 
-			// Start minification process
+			// start minification process
 			await startMinProcessAsync(JPEG_files, PNG_files, WEBP_files, level);
 		}
 
-		//  === Extension option ===
+		// === extension option ===
 		if (min_images_answers.minify === "extension") {
 			const extension_min_images_answers = await inquirer.prompt(
 				extension_min_images_prompt,
 			);
 
-			// Get all image files by extension
+			// get all image files by extension
 			if (extension_min_images_answers.extension.includes("jpeg")) {
 				JPEG_files = await getAllImageFilesAsync(["jpg", "jpeg"]);
 			}
@@ -303,11 +303,11 @@ export async function minImagesAsync(): Promise<void> {
 			if (extension_min_images_answers.extension.includes("webp"))
 				WEBP_files = await getAllImageFilesAsync(["webp"]);
 
-			// Start minification process
+			// start minification process
 			await startMinProcessAsync(JPEG_files, PNG_files, WEBP_files, level);
 		}
 
-		// === Manual option ===
+		// === manual option ===
 		if (min_images_answers.minify === "manual") {
 			const manual_min_images_answers = await inquirer.prompt(
 				manual_min_images_prompt,
@@ -316,7 +316,7 @@ export async function minImagesAsync(): Promise<void> {
 			const manual_file = manual_min_images_answers.manual;
 			const extension = manual_file.split(".").pop() as T_SharpExtension;
 
-			// Start minification process
+			// start minification process
 			await startMinProcessManualAsync(manual_file, extension, level);
 		}
 
