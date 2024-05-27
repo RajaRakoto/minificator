@@ -40,13 +40,13 @@ export async function checkerAsync(): Promise<object[]> {
 	menu.push(
 		new inquirer.Separator("================= images ================="),
 		getMenu(
-			"Minify JPEG|PNG|WEBP",
+			"Minify JPEG | PNG | WEBP",
 			`${imagesAvailable ? "min-images" : ""}`,
 			`${imagesAvailable ? "" : "no image file founded"}`,
 			imagesAvailable ? true : false,
 		),
 		getMenu(
-			"Resize JPEG|PNG|WEBP",
+			"Resize JPEG | PNG | WEBP",
 			`${imagesAvailable ? "resize-images" : ""}`,
 			`${imagesAvailable ? "" : "no image file founded"}`,
 			imagesAvailable ? true : false,

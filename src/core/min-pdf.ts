@@ -102,14 +102,14 @@ async function pdfCompressAsync(
 ): Promise<void> {
 	try {
 		const promises = files.map(async (file) => {
-			const input = `${INPUT_FILES_PATH}/${file}`;
+			const input = `\"${INPUT_FILES_PATH}/${file}\"`;
 			const output = `${OUTPUT_MIN_PDF_PATH}/${file}`;
 			const buffer = await compress(input, {
 				imageQuality: qualityValue,
 			});
 
 			await writeFileAsync(output, buffer);
-			successMessage(file, "pdf", "minified");
+			successMessage(file, "clipboard", "minified");
 		});
 		await Promise.all(promises);
 	} catch (error) {
