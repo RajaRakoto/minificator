@@ -77,15 +77,15 @@ const quality_prompt = [
 		choices: [
 			{
 				name: "High Compression > Slight Quality Loss",
-				value: 30,
+				value: 40,
 			},
 			{
 				name: "Balanced Compression > Recommended",
-				value: 50,
+				value: 60,
 			},
 			{
 				name: "Low Compression > High Quality",
-				value: 70,
+				value: 80,
 			},
 		],
 	},
