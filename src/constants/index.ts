@@ -4,7 +4,7 @@ import { T_ImageExtension } from "@/@types";
 // ==============================
 
 // dev
-export const DEVMODE = true;
+export const DEVMODE = false;
 
 // path
 export const FONT_PATH = "./fonts/Standard.flf";
