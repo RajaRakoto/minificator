@@ -1,53 +1,29 @@
-# cli-boilerplate 🚀
+# minificator 🛠️
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/for-you.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-git.svg)](https://forthebadge.com) [![forthebadge](https://github.com/RajaRakoto/github-docs/blob/master/badge/build-by.svg?raw=true)](https://forthebadge.com)
 
 ![Git](https://img.shields.io/badge/-Git-777?style=flat&logo=git&logoColor=F05032&labelColor=ffffff) ![Gitub](https://img.shields.io/badge/-Gitub-777?style=flat&logo=github&logoColor=777&labelColor=ffffff)
 
-**Developer Ready: A versatile template designed to jumpstart CLI development in TypeScript - Engineered to seamlessly integrate with various CLI projects, ensuring smooth compatibility with a pre-configured environment**
+**Ditch online tools and optimize your files locally with Minificator, a powerful and user-friendly CLI tool that swiftly reduces file sizes for a variety of file formats, including images, PDFs, and more ...**
 
-Instant Value - All basic tools included and configured:
+key features:
 
-- 🚀 Typescript >= 5.3
-- 🧅 Bun.js >= 1.0.26
-- 🧅 Use Bun as package manager
-- 🌈 ESM
-- 🧹 ESlint with some initial rules recommendation
-- ✅ Jest or Bun test for fast unit testing and code coverage
-- 📚 Type definitions for Bun.js and Jest
-- 🎨 Prettier to enforce consistent code style
-- ⚙️ EditorConfig for consistent coding style
-- 📦 NPM scripts for common operations
-- 🛠️ Example configuration for GitHub Actions
-- 📝 Simple example of TypeScript code and unit test
-- 🐗 Run tasks with Grunt (example for backup)
-- 🚄 Build faster
-- 🖥️ Ungit for version control (git) with a GUI
-- 🧪 A lightweight private npm proxy registry with Verdaccio, useful for testing your CLI
-- 🔳 Inquirer.js - A collection of common interactive command line user interfaces
-- 🔳 Execa - A process execution library that supports synchronous and asynchronous execution of child processes
-- 🔳 Figlet - A program that generates text banners, in a variety of typefaces, composed of letters made up of conglomerations of smaller ASCII characters
-- 🔳 Node-emoji - A library that provides a simple way to use emojis in your CLI
-- 🔳 Ora - A terminal spinner library that allows you to add a loading spinner to your CLI
-- 🔳 Chalk - A library for styling terminal strings with colors and text styles
+- 🔒 **Offline** - Optimize files locally to ensure data privacy and security without needing an internet connection.
+- 🚀 **Performance & Optimization** - Reduce file sizes while maintaining quality for efficient storage and faster websites.
+- 🎯 **Ease to use** - Features an intuitive CLI interface, making file optimization simple even for beginners
+- 📂 **Variety of formats** - Supports various file formats like JPEG, PNG, GIF, PDFs, and more.
+- 🖥️ **Cross-platform** - Operates smoothly on Windows, macOS, and Linux.
+- 🔄 **Regular updates** - Frequently updated with new features, performance enhancements, and bug fixes for the best user experience.
 
 ---
 
 ### 📌 Usage
 
-To use this template, use the following commands:
-
 ```bash
-bun create github.com/RajaRakoto/cli-boilerplate <project-name>
-cd <project-name>
-bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
+npm install -g @raja-rakoto/minificator
 ```
 
-> NOTE 1: I employ the `MIT license` for this starter kit, which includes my name and GitHub profile. Please remember to adjust or remove it if deemed unnecessary.
-
-> NOTE 2: In order to help you better understand the structure of this boilerplate, there is a `README.md` file in each subdirectory of src.
-
-> NOTE 3: For certain configurations in the `package.json` file, you need to modify them to tailor them to your project (e.g: name, description, author, keywords, main, repository, ...).
+<img src="https://github.com/RajaRakoto/github-docs/blob/master/minificator/minificator-demo.gif?raw=true" width="800">
 
 ---
 
@@ -121,17 +97,4 @@ bun run pkg-upgrade # to upgrade outdated dependencies in interactive mode
 
 ### 📌 Build
 
-When using the **build.js** file in this boilerplate, it's important to note the significance of the **target** option. By default, if the target option is not specified in the **build.js** file, it will be set to `browser`. However, for projects utilizing the `bun.js` runtime environment, it's imperative to explicitly set the target to `bun`. This guarantees compatibility with the `bun` shell environment and prevents unexpected behavior. Furthermore, it's noteworthy that the `target` supports three possible values: `browser`, `bun`, and `node`, providing flexibility in defining the build target according to specific project requirements.
-
----
-
-### 📌 Similar
-
-You can also check out my other starter projects:
-
-- 🚀 [node-boilerplate](https://github.com/RajaRakoto/node-boilerplate)
-- 🚀 [bun-boilerplate](https://github.com/RajaRakoto/bun-boilerplate)
-- 🚀 [react-boilerplate](https://github.com/RajaRakoto/react-boilerplate)
-- 🚀 [next-boilerplate](https://github.com/RajaRakoto/next-boilerplate)
-- 🚀 [qwik-boilerplate](https://github.com/RajaRakoto/qwik-boilerplate)
-- 🚀 [vscode-boilerplate](https://github.com/RajaRakoto/vscode-boilerplate)
+When using the **build.js** file in this project, it's important to note the significance of the **target** option. By default, if the target option is not specified in the **build.js** file, it will be set to `browser`. However, for projects utilizing the `bun.js` runtime environment, it's imperative to explicitly set the target to `bun`. This guarantees compatibility with the `bun` shell environment and prevents unexpected behavior. Furthermore, it's noteworthy that the `target` supports three possible values: `browser`, `bun`, and `node`, providing flexibility in defining the build target according to specific project requirements.
