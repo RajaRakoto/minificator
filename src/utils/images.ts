@@ -40,7 +40,7 @@ export async function getAllImageFilesAsync(
 }
 
 /**
- * @description A function to get filtered image file names based on specified extensions
+ * @description A function to asynchronously get filtered image file names based on specified extensions
  * @param images An array of image file names to filter
  * @param extensions An array of file extensions to filter by
  */
@@ -48,17 +48,22 @@ export async function getFilteredImageFilesAsync(
 	images: string[],
 	extensions: T_ImageExtension[],
 ): Promise<string[]> {
-	try {
-		const filteredImagesFile = images.filter((image) => {
-			const fileExtension = image.split(".").pop()?.toLowerCase();
-			return (
-				fileExtension && extensions.includes(fileExtension as T_ImageExtension)
+	return new Promise((resolve, reject) => {
+		try {
+			const filteredImagesFile = images.filter((image) => {
+				const fileExtension = image.split(".").pop()?.toLowerCase();
+				return (
+					fileExtension &&
+					extensions.includes(fileExtension as T_ImageExtension)
+				);
+			});
+			resolve(filteredImagesFile);
+		} catch (error) {
+			reject(
+				new Error(`[error]: error during filtering image files: \n${error}`),
 			);
-		});
-		return filteredImagesFile;
-	} catch (error) {
-		throw new Error(`[error]: error during filtering image files: \n${error}`);
-	}
+		}
+	});
 }
 
 /**
@@ -70,21 +75,25 @@ export async function isExistedImageFilesByExtensionAsync(
 	images: string[],
 	extensions: T_ImageExtension[],
 ): Promise<boolean> {
-	try {
-		const extensionsLowerCase = extensions.map((ext) => ext.toLowerCase());
-		const exists = images.some((image) => {
-			const fileExtension = image.split(".").pop()?.toLowerCase();
-			return (
-				fileExtension &&
-				extensionsLowerCase.includes(fileExtension as T_ImageExtension)
+	return new Promise((resolve, reject) => {
+		try {
+			const extensionsLowerCase = extensions.map((ext) => ext.toLowerCase());
+			const exists = images.some((image) => {
+				const fileExtension = image.split(".").pop()?.toLowerCase();
+				return (
+					fileExtension &&
+					extensionsLowerCase.includes(fileExtension as T_ImageExtension)
+				);
+			});
+			resolve(exists);
+		} catch (error) {
+			reject(
+				new Error(
+					`[error]: error during checking existence of image files: \n${error}`,
+				),
 			);
-		});
-		return exists;
-	} catch (error) {
-		throw new Error(
-			`[error]: error during checking existence of image files: \n${error}`,
-		);
-	}
+		}
+	});
 }
 
 /**
