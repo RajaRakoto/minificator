@@ -110,10 +110,7 @@ export async function copyFileAsync(
  */
 export async function createDirectoryAsync(directory: string): Promise<void> {
 	try {
-		const realDirectory = DEVMODE
-			? directory
-			: await resolveRealPathAsync(directory);
-		const targetDir = path.resolve(path.join(process.cwd(), realDirectory));
+		const targetDir = path.resolve(path.join(process.cwd(), directory));
 
 		if (!fs.existsSync(targetDir)) {
 			await mkdirAsync(targetDir, { recursive: true });
