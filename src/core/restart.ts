@@ -22,7 +22,7 @@ const restart_prompt = [
 	},
 ];
 
-export async function restart(spinner?: Ora): Promise<void> {
+export async function restartAsync(spinner?: Ora): Promise<void> {
 	if (spinner) spinner.stop();
 	const restart_answers = await inquirer.prompt(restart_prompt);
 	if (restart_answers.restart) {

@@ -9,7 +9,7 @@ import { menu_prompt } from "@/menu";
 import { app } from "@/core/app";
 
 /* utils */
-import { bannerRenderer } from "@/utils/ascii";
+import { bannerRendererAsync } from "@/utils/ascii";
 import { exitCLI } from "@/utils/extras";
 
 /* files */
@@ -22,7 +22,7 @@ import pkg from "../package.json";
  */
 export async function myCLI(): Promise<void> {
 	// show banner
-	const banner = await bannerRenderer("my-cli", `${pkg.description}`);
+	const banner = await bannerRendererAsync("my-cli", `${pkg.description}`);
 	console.log(`${banner}\n`);
 
 	// start menu
