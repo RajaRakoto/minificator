@@ -9,11 +9,9 @@
 key features:
 
 - 🔒 **Offline** - Optimize files locally to ensure data privacy and security without needing an internet connection.
-- 🚀 **Performance & Optimization** - Reduce file sizes while maintaining quality for efficient storage and faster websites.
+- 🚀 **Performance & Optimization** - Minimize file sizes while preserving quality, ensuring efficient storage and enhancing the performance of various applications.
 - 🎯 **Ease to use** - Features an intuitive CLI interface, making file optimization simple even for beginners
 - 📂 **Variety of formats** - Supports various file formats like JPEG, PNG, GIF, PDFs, and more.
-- 🖥️ **Cross-platform** - Operates smoothly on Windows, macOS, and Linux.
-- 🔄 **Regular updates** - Frequently updated with new features, performance enhancements, and bug fixes for the best user experience.
 
 ---
 
