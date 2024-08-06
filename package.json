@@ -17,9 +17,7 @@
 	},
 	"homepage": "https://github.com/RajaRakoto/cli-boilerplate#readme",
 	"bugs": "https://github.com/RajaRakoto/cli-boilerplate/issues",
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"keywords": [
 		"cli",
 		"typescript",
