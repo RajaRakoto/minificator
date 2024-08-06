@@ -1,17 +1,13 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.8.4-nightly.bd1d0c6/schema.json",
-	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-	"files": { "ignoreUnknown": false, "ignore": [] },
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
 	"formatter": {
 		"enabled": true,
-		"useEditorconfig": true,
 		"formatWithErrors": false,
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"lineEnding": "lf",
 		"lineWidth": 80,
 		"attributePosition": "auto",
-		"bracketSpacing": true,
 		"ignore": [
 			"**/build",
 			"**/dist",
@@ -23,13 +19,12 @@
 			"**/jspm_packages"
 		]
 	},
-	"organizeImports": { "enabled": true },
+	"organizeImports": { "enabled": false },
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": false,
 			"complexity": {
-				"noBannedTypes": "error",
 				"noExtraBooleanCast": "error",
 				"noMultipleSpacesInRegularExpressionLiterals": "error",
 				"noUselessCatch": "error",
@@ -43,9 +38,8 @@
 				"noEmptyCharacterClassInRegex": "error",
 				"noEmptyPattern": "error",
 				"noGlobalObjectCalls": "error",
-				"noInnerDeclarations": "error",
 				"noInvalidConstructorSuper": "error",
-				"noNewSymbol": "error",
+				"noInvalidNewBuiltin": "error",
 				"noNonoctalDecimalEscape": "error",
 				"noPrecisionLoss": "error",
 				"noSelfAssign": "error",
@@ -57,6 +51,7 @@
 				"noUnsafeFinally": "error",
 				"noUnsafeOptionalChaining": "error",
 				"noUnusedLabels": "error",
+				"noUnusedPrivateClassMembers": "error",
 				"noUnusedVariables": "error",
 				"useArrayLiterals": "off",
 				"useIsNan": "error",
@@ -98,6 +93,7 @@
 				"noUnsafeDeclarationMerging": "error",
 				"noUnsafeNegation": "error",
 				"useGetterReturn": "error",
+				"useNamespaceKeyword": "error",
 				"useValidTypeof": "error"
 			}
 		},
@@ -115,17 +111,17 @@
 		]
 	},
 	"javascript": {
-		"globals": ["Bun"],
+    "globals": ["Bun"],
 		"formatter": {
 			"jsxQuoteStyle": "double",
 			"quoteProperties": "asNeeded",
 			"trailingCommas": "all",
 			"semicolons": "always",
 			"arrowParentheses": "always",
+			"bracketSpacing": true,
 			"bracketSameLine": false,
 			"quoteStyle": "double",
-			"attributePosition": "auto",
-			"bracketSpacing": true
+			"attributePosition": "auto"
 		}
 	},
 	"overrides": [
@@ -138,6 +134,7 @@
 						"noConstAssign": "off",
 						"noGlobalObjectCalls": "off",
 						"noInvalidConstructorSuper": "off",
+						"noInvalidNewBuiltin": "off",
 						"noNewSymbol": "off",
 						"noSetterReturn": "off",
 						"noUndeclaredVariables": "off",
