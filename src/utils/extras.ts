@@ -1,10 +1,10 @@
 /* libs */
 import * as emoji from "node-emoji";
-import * as path from "path";
+import * as path from "node:path";
 import open from "open";
-import util from "util";
+import util from "node:util";
 import chalk from "chalk";
-import fs from "fs";
+import fs from "node:fs";
 import { execa } from "execa";
 
 /* constants */
@@ -53,7 +53,7 @@ export async function defaultOpenAsync(filePath: string): Promise<void> {
 	try {
 		const platform = process.platform;
 		const realPath = DEVMODE ? filePath : await resolveRealPathAsync(filePath);
-		let execCMD: string = "";
+		let execCMD = "";
 
 		switch (platform) {
 			case "win32":
@@ -133,13 +133,14 @@ export async function writeToFileAsync(
 ): Promise<void> {
 	try {
 		const fileExists = await fileExistsAsync(destination);
+		let finalContent = content;
 
 		if (fileExists) {
 			const existingContent = await readFileAsync(destination, "utf8");
-			content = existingContent + content;
+			finalContent = existingContent + content;
 		}
 
-		await writeFileAsync(destination, content);
+		await writeFileAsync(destination, finalContent);
 		console.log(successMessage);
 	} catch (error) {
 		throw new Error(
