@@ -30,7 +30,7 @@ export async function getAllImageFilesAsync(
 			) {
 				imageFiles.push(file);
 			}
-    }
+		}
 		return imageFiles;
 	} catch (error) {
 		throw new Error(
