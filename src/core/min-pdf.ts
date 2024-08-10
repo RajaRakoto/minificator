@@ -109,8 +109,8 @@ async function pdfCompressAsync(
 				imageQuality: qualityValue,
 			});
 
-			// @ts-expect-error
-			await writeFileAsync(output, buffer);
+			const uint8Array = new Uint8Array(buffer);
+			await writeFileAsync(output, uint8Array);
 			successMessage(file, "clipboard", "minified");
 		});
 		await Promise.all(promises);
