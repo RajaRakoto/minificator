@@ -8,7 +8,7 @@ import { INPUT_FILES_PATH, OUTPUT_MIN_IMAGES_PATH } from "@/constants";
 import { readDirAsync } from "@/utils/extras";
 
 /* types */
-import { T_ImageExtension, T_SharpExtension } from "@/@types";
+import type { T_ImageExtension, T_SharpExtension } from "@/@types";
 
 // ==============================
 
@@ -22,7 +22,7 @@ export async function getAllImageFilesAsync(
 	try {
 		const files = await readDirAsync(INPUT_FILES_PATH);
 		const imageFiles: string[] = [];
-		files.forEach((file) => {
+		for (const file of files) {
 			const fileExtension = file.split(".").pop()?.toLowerCase();
 			if (
 				fileExtension &&
@@ -30,7 +30,7 @@ export async function getAllImageFilesAsync(
 			) {
 				imageFiles.push(file);
 			}
-		});
+		}
 		return imageFiles;
 	} catch (error) {
 		throw new Error(
@@ -124,9 +124,8 @@ export async function sharpTestAsync(
 			.toFile(output, (error) => {
 				if (error) {
 					throw new Error(`[error]: JPEG -> sharp test failed: \n${error}`);
-				} else {
-					console.log("JPEG -> sharp test successful !");
 				}
+				console.log("JPEG -> sharp test successful !");
 			});
 	}
 	if (extension === "png") {
@@ -135,9 +134,8 @@ export async function sharpTestAsync(
 			.toFile(output, (error) => {
 				if (error) {
 					throw new Error(`[error]: PNG -> sharp test failed: \n${error}`);
-				} else {
-					console.log("PNG -> sharp test successful !");
 				}
+				console.log("PNG -> sharp test successful !");
 			});
 	}
 	if (extension === "webp") {
@@ -146,9 +144,8 @@ export async function sharpTestAsync(
 			.toFile(output, (error) => {
 				if (error) {
 					throw new Error(`[error]: WEBP -> sharp test failed: \n${error}`);
-				} else {
-					console.log("WEBP -> sharp test successful !");
 				}
+				console.log("WEBP -> sharp test successful !");
 			});
 	}
 }

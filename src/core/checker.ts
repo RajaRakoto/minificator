@@ -22,7 +22,7 @@ export async function checkerAsync(): Promise<object[]> {
 		available: boolean,
 	) => {
 		return {
-			name: `${emoji.get(available ? "wrench" : "weary")} ${available ? name : chalk.gray(name + " - " + missingMessage)}`,
+			name: `${emoji.get(available ? "wrench" : "weary")} ${available ? name : chalk.gray(`${name} - ${missingMessage}`)}`,
 			value: value,
 		};
 	};
@@ -43,20 +43,20 @@ export async function checkerAsync(): Promise<object[]> {
 			"Minify JPEG | PNG | WEBP",
 			`${imagesAvailable ? "min-images" : ""}`,
 			`${imagesAvailable ? "" : "no image file founded"}`,
-			imagesAvailable ? true : false,
+			!!imagesAvailable,
 		),
 		getMenu(
 			"Resize JPEG | PNG | WEBP",
 			`${imagesAvailable ? "resize-images" : ""}`,
 			`${imagesAvailable ? "" : "no image file founded"}`,
-			imagesAvailable ? true : false,
+			!!imagesAvailable,
 		),
 		new inquirer.Separator("================== pdf ==================="),
 		getMenu(
 			"Minify PDF",
 			`${pdfAvailable ? "min-pdf" : ""}`,
 			`${pdfAvailable ? "" : "no pdf file founded"}`,
-			pdfAvailable ? true : false,
+			!!pdfAvailable,
 		),
 	);
 

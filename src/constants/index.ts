@@ -1,5 +1,5 @@
 /* types */
-import { T_ImageExtension } from "@/@types";
+import type { T_ImageExtension } from "@/@types";
 
 // ==============================
 

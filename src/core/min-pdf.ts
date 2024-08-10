@@ -61,7 +61,8 @@ const manual_min_pdf_prompt = [
 			const data = await getAllPdfFilesAsync();
 			if (answer.length < 1) {
 				return "You must enter a file name !";
-			} else if (!data.includes(answer)) {
+			}
+			if (!data.includes(answer)) {
 				return "The file name does not exist, is not an pdf or is not supported !";
 			}
 			return true;
@@ -108,6 +109,7 @@ async function pdfCompressAsync(
 				imageQuality: qualityValue,
 			});
 
+			// @ts-expect-error
 			await writeFileAsync(output, buffer);
 			successMessage(file, "clipboard", "minified");
 		});

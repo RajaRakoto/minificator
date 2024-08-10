@@ -21,7 +21,7 @@ import {
 import { getAllImageFilesAsync } from "@/utils/images";
 
 /* types */
-import { I_Resolution, T_Resolution } from "@/@types";
+import type { I_Resolution, T_Resolution } from "@/@types";
 
 // ==============================
 
@@ -101,7 +101,8 @@ const manual_resize_images_prompt = [
 			);
 			if (answer.length < 1) {
 				return "You must enter a file name !";
-			} else if (!data.includes(answer)) {
+			}
+			if (!data.includes(answer)) {
 				return "The file name does not exist, is not an image or is not supported !";
 			}
 			return true;
