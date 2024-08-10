@@ -25,7 +25,7 @@ import {
 } from "@/utils/images";
 
 /* types */
-import { T_SharpExtension } from "@/@types";
+import type { T_SharpExtension } from "@/@types";
 
 // ==============================
 
@@ -103,7 +103,8 @@ const manual_min_images_prompt = [
 			const data = await getAllImageFilesAsync(SUPPORTED_MIN_IMAGES_EXTENSIONS);
 			if (answer.length < 1) {
 				return "You must enter a file name !";
-			} else if (!data.includes(answer)) {
+			}
+			if (!data.includes(answer)) {
 				return "The file name does not exist, is not an image or is not supported !";
 			}
 			return true;
@@ -259,7 +260,7 @@ export async function minImagesAsync(): Promise<void> {
 					select_min_images_answers.select,
 					["jpg", "jpeg"],
 				);
-				console.log("jpeg files:" + JPEG_files);
+				console.log(`jpeg files:${JPEG_files}`);
 			}
 			if (
 				await isExistedImageFilesByExtensionAsync(
