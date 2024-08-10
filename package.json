@@ -17,16 +17,8 @@
 	},
 	"homepage": "https://github.com/RajaRakoto/minificator#readme",
 	"bugs": "https://github.com/RajaRakoto/minificator/issues",
-	"files": [
-		"dist"
-	],
-	"keywords": [
-		"cli",
-		"tools",
-		"minify",
-		"compress",
-		"all-in-one"
-	],
+	"files": ["dist"],
+	"keywords": ["cli", "tools", "minify", "compress", "all-in-one"],
 	"engines": {
 		"node": ">= 16.0.0"
 	},
@@ -70,6 +62,7 @@
 	},
 	"dependencies": {
 		"commander": "^12.1.0",
+		"compress-pdf": "^0.5.1",
 		"execa": "^9.3.0",
 		"figlet": "^1.7.0",
 		"inquirer": "^9.2.20",
