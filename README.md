@@ -58,8 +58,10 @@ npm install -g @raja-rakoto/minificator
 
 **Linting and Formatting**
 
-- 📜 `eslint` - Lint source files with ESLint.
-- 📜 `prettier` - Reformat source files with Prettier.
+- 📜 `biome:start` - Starts the Biome daemon server. You can specify a custom configuration file path using the `--config-path` option.
+- 📜 `biome:stop` - Stops the Biome daemon server.
+- 📜 `biome:fix` - Runs a source code check and applies automatic fixes (linter & formatter) according to the defined rules.
+- 📜 `biome:unsafe` - Works like `biome:fix`, but may apply more invasive or risky changes.
 
 **Backup and Dependency Management**
 

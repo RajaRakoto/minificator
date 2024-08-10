@@ -102,7 +102,7 @@ export const complex_prompt = [
 		},
 		// starting condition
 		when(answers: I_answers): boolean {
-			return answers.target != "local";
+			return answers.target !== "local";
 		},
 	},
 	{
