@@ -109,6 +109,7 @@ async function pdfCompressAsync(
 				imageQuality: qualityValue,
 			});
 
+			// @ts-expect-error
 			await writeFileAsync(output, buffer);
 			successMessage(file, "clipboard", "minified");
 		});
