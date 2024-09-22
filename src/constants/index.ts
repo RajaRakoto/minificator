@@ -4,21 +4,21 @@ import type { T_ImageExtension } from "@/@types";
 // ==============================
 
 // dev
-export const DEVMODE = false;
+export const DEV_MODE = false;
 
 // path
 export const FONT_PATH = "./fonts/Standard.flf";
-export const INPUT_FILES_PATH = DEVMODE ? "./tests" : "./";
-export const OUTPUT_ROOT_PATH = DEVMODE
+export const INPUT_FILES_PATH = DEV_MODE ? "./tests" : "./";
+export const OUTPUT_ROOT_PATH = DEV_MODE
 	? "./tests/minificator"
 	: "./minificator";
-export const OUTPUT_MIN_IMAGES_PATH = DEVMODE
+export const OUTPUT_MIN_IMAGES_PATH = DEV_MODE
 	? "./tests/minificator/minified-images"
 	: "./minificator/minified-images";
-export const OUTPUT_RESIZE_IMAGES_PATH = DEVMODE
+export const OUTPUT_RESIZE_IMAGES_PATH = DEV_MODE
 	? "./tests/minificator/resized-images"
 	: "./minificator/resized-images";
-export const OUTPUT_MIN_PDF_PATH = DEVMODE
+export const OUTPUT_MIN_PDF_PATH = DEV_MODE
 	? "./tests/minificator/minified-pdf"
 	: "./minificator/minified-pdf";
 

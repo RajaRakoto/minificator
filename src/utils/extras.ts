@@ -8,7 +8,7 @@ import fs from "node:fs";
 import { execa } from "execa";
 
 /* constants */
-import { DEVMODE } from "@/constants";
+import { DEV_MODE } from "@/constants";
 
 // ==============================
 
@@ -52,7 +52,7 @@ export async function resolveRealPathAsync(
 export async function defaultOpenAsync(filePath: string): Promise<void> {
 	try {
 		const platform = process.platform;
-		const realPath = DEVMODE ? filePath : await resolveRealPathAsync(filePath);
+		const realPath = DEV_MODE ? filePath : await resolveRealPathAsync(filePath);
 		let execCMD = "";
 
 		switch (platform) {
@@ -90,7 +90,7 @@ export async function copyFileAsync(
 	target: string,
 ): Promise<void> {
 	try {
-		const realSource = DEVMODE ? source : await resolveRealPathAsync(source);
+		const realSource = DEV_MODE ? source : await resolveRealPathAsync(source);
 		const targetDir = path.resolve(path.join(process.cwd(), target));
 
 		if (!fs.existsSync(targetDir)) {
@@ -155,7 +155,7 @@ export async function writeToFileAsync(
  */
 export async function readFromFileAsync(filePath: string): Promise<string> {
 	try {
-		const realPath = DEVMODE ? filePath : await resolveRealPathAsync(filePath);
+		const realPath = DEV_MODE ? filePath : await resolveRealPathAsync(filePath);
 		const content = await readFileAsync(realPath, "utf8");
 		return content;
 	} catch (error) {
