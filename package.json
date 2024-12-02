@@ -1,6 +1,6 @@
 {
 	"name": "@raja-rakoto/minificator",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "Minificator CLI: efficience solution for swiftly reducing file sizes and effortlessly optimizing a variety of file formats 🛠️",
 	"author": "Raja Rakotonirina <raja.rakoto7@gmail.com>",
 	"license": "MIT",
