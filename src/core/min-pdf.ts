@@ -111,7 +111,7 @@ async function pdfCompressAsync(
 
 			const uint8Array = new Uint8Array(buffer);
 			await writeFileAsync(output, uint8Array);
-			successMessage(file, "clipboard", "minified");
+			console.log(successMessage(file, "clipboard", "minified"));
 		});
 		await Promise.all(promises);
 	} catch (error) {

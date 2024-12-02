@@ -173,10 +173,8 @@ export function successMessage(
 	file: string,
 	emojiCode: string,
 	context: string,
-): void {
-	console.log(
-		chalk.green(`${emoji.get(emojiCode)} ${file} ${context} ... [done]`),
-	);
+): string {
+	return chalk.green(`${emoji.get(emojiCode)} ${file} ${context} ... [done]`);
 }
 
 /**

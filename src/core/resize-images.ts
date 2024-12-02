@@ -183,7 +183,7 @@ async function sharpResizeAsync(
 				if (error) {
 					reject(errorMessage(error, "resize"));
 				} else {
-					successMessage(file, "framed_picture", "resized");
+					console.log(successMessage(file, "framed_picture", "resized"));
 					resolve();
 				}
 			});

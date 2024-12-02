@@ -177,7 +177,7 @@ async function sharpCompressAsync(
 				if (error) {
 					reject(errorMessage(error, "minify"));
 				} else {
-					successMessage(file, "framed_picture", "minified");
+					console.log(successMessage(file, "framed_picture", "minified"));
 					resolve();
 				}
 			});
